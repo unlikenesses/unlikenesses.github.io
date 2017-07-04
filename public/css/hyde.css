@@ -167,7 +167,7 @@ a.sidebar-nav-item:focus {
   }
 }
 
-.post-title, .page-title {
+.post-title, .page-title, h2, h3, h4 {
   font-family: 'Roboto Slab', Helvetica, Arial, sans-serif;
 }
 
