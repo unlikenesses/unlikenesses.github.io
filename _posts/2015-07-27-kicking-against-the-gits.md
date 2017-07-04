@@ -4,9 +4,9 @@ layout: post
 comments: true
 ---
 
-Recent radio silence is due to a sudden inundation of work, which is much to be welcomed, but which also forced me to confront the issue of deployment to shared servers. So many clients still use servers which don't have the facility to deploy via [Git](https://git-scm.com/). While one or two of my ongoing sites do use Git (in fact they were my introduction to it) with most jobs I'm forced to wrack my brains, and my fingers, clicking through folders in Filezilla's local pane until I find the files which I've recently changed, before clicking through to the corresponding folders on the server pane and dragging the files across. It's a huge waste of time, strains your eyes, confounds your fingers, and discombobulates your brain. 
+So many clients still use servers which don't have the facility to deploy via [Git](https://git-scm.com/). While one or two of my ongoing sites do use Git (in fact they were my introduction to it) with most jobs I'm forced to wrack my brains, and my fingers, clicking through folders in Filezilla's local pane until I find the files which I've recently changed, before clicking through to the corresponding folders on the server pane and dragging the files across. It's a huge waste of time, strains your eyes, confounds your fingers, and discombobulates your brain. 
 
-It just so happens that one of the recent jobs involves working with another coder, and therefore the use of Git was absolutely necessary (using a repo on Bitbucket). Unforch (apologies, but this is one abbreviation I'm actually starting to love) the target server, of course, does not support Git. So it's looking like we're back to FTP.
+It just so happens that one of the recent jobs involves working with another coder, and therefore the use of Git was absolutely necessary (using a repo on Bitbucket). Unfortunately the target server, of course, does not support Git. So it's looking like we're back to FTP.
 
 Determined with a bloody-minded obstinacy to move away from such evils, I did some research into alternatives, and found [git-ftp](https://github.com/git-ftp/git-ftp), originally built by [René Moser](https://github.com/resmo) but [apparently](https://github.com/git-ftp/git-ftp/blob/develop/AUTHORS) elaborated by a bunch of other contributors.
 
