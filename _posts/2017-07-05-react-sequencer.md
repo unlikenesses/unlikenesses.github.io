@@ -4,8 +4,6 @@ layout: post
 comments: true
 ---
 
-![Screenshot]({{ site.baseurl }}public/images/sequencer.jpg)
-
 As an exercise I'm going to build a simple sequencer in React. You can view it in action [here](http://unlikenesses.com/react-sequencer/). The final source code is on [Github](https://github.com/unlikenesses/react-sequencer).
 
 I'll start with [create-react-app](https://github.com/facebookincubator/create-react-app), which provides the necessary initial bootstrapping so we can get going quickly. If you don't already have it installed, run
