@@ -69,14 +69,12 @@ export default Pads;
 ```javascript
 import React from 'react';
 
-class Controls extends React.Component {
-    render() {
-        return (
-            <div className="controls">
-                Controls
-            </div>          
-        );
-    }
+const Controls = (props) => {
+    return (
+        <div className="controls">
+            Controls
+        </div>          
+    );
 }
 
 export default Controls;
@@ -124,13 +122,9 @@ We need to quickly create this `Pad` component in `components/Pad.js`:
 ```javascript
 import React from 'react';
 
-class Pad extends React.Component {
-    render() {
-        return (
-            <div className="pad"></div>
-        );
-    }
-}
+const Pad = (props) => (
+    <div className="pad"></div>
+);
 
 export default Pad;
 ```
@@ -180,29 +174,27 @@ return <Pad
 Then in `Pad` we just need to add an `onClick` event that calls the `toggleActive` method in its parent component, passing its `rowIndex` and `id`:
 
 ```javascript
-render() {
-    return (
-        <div 
-            className="pad"
-            onClick={() => this.props.toggleActive(this.props.rowIndex, this.props.id)}>
-        </div>
-    );
-}
+return (
+    <div 
+        className="pad"
+        onClick={() => props.toggleActive(props.rowIndex, props.id)}>
+    </div>
+);
 ```
 
 Now when you click on a pad you should see its coordinates in the console. Now we need to find the appropriate element in the `state` and toggle its value between `0` and `1`. In the `toggleActive` function in `Pads` first we make a copy of the `pads` state and get the current value of the pad that's been clicked:
 
 ```javascript
-var pads = [...this.state.pads];
-var padActive = pads[rowIndex][id];
+let pads = [...this.state.pads];
+let padActive = pads[rowIndex][id];
 ```
 
 We're using the [spread operator](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Spread_operator) to make a clone of the pads array, then getting the clicked pad's current active state (`0` or `1`). Then we just need to toggle it and update the state:
 
 ```javascript
 toggleActive(rowIndex, id) {
-    var pads = [...this.state.pads];
-    var padState = pads[rowIndex][id];
+    let pads = [...this.state.pads];
+    let padState = pads[rowIndex][id];
     if (padState === 1) {
         pads[rowIndex][id] = 0;
     } else {
@@ -216,8 +208,8 @@ We now need to conditionally add an `active` class to the `Pad` component depend
 
 ```javascript
 <div 
-    className={"pad " + (this.props.state === 1 ? 'active' : '')}
-    onClick={() => this.props.toggleActive(this.props.rowIndex, this.props.id)}>
+    className={"pad " + (props.state === 1 ? 'active' : '')}
+    onClick={() => props.toggleActive(props.rowIndex, props.id)}>
 </div>
 ```
 
@@ -266,14 +258,12 @@ This grabs the current state, and updates it with its opposite. Pass this method
 Then pick it up in `Controls.js`. I'm adding a line to set the button text according to whether the `playing` state is `true` or `false`:
 
 ```javascript
-render() {
-    var buttonText = this.props.playing ? 'Stop' : 'Play';
-    return (
-        <div className="controls">
-            <button onClick={() => this.props.togglePlaying()}>{buttonText}</button>
-        </div>          
-    );
-}
+let buttonText = props.playing ? 'Stop' : 'Play';
+return (
+    <div className="controls">
+        <button onClick={() => props.togglePlaying()}>{buttonText}</button>
+    </div>          
+);
 ```
 
 We now need to be able to set and clear a timer that will call a `tick` method every `x` seconds, where `x` is calculated from our `bpm`. Let's start with the set method, remaining in `App.js`:
@@ -296,7 +286,7 @@ Our `tick` method will increment the current `pos` and reset it to `0` if it rea
 
 ```javascript
 tick() {
-    var pos = this.state.pos;
+    let pos = this.state.pos;
     pos++;
     if (pos > 7) {
         pos = 0;
@@ -342,8 +332,8 @@ Finally in `Pad` we can add another class called `playing` depending on whether 
 
 ```javascript
 <div 
-    className={"pad " + (this.props.state === 1 ? 'active' : '') + (this.props.pos === this.props.id ? ' playing' : '')}
-    onClick={() => this.props.toggleActive(this.props.rowIndex, this.props.id)}>
+    className={"pad " + (props.state === 1 ? 'active' : '') + (props.pos === props.id ? ' playing' : '')}
+    onClick={() => props.toggleActive(props.rowIndex, props.id)}>
 </div>
 ```
 
@@ -400,7 +390,15 @@ We then pass it back down to `Pads`:
 <Pads pos={this.state.pos} pads={this.state.pads} />
 ```
 
-and then in `Pads` change
+Since `Pads` no longer has state we can make it a stateless functional component by removing the class declaration and replacing it with 
+
+```javascript
+const Pads = (props) => (
+```
+
+We also need to remove the `render()` method and the `return` statement, and replace all references to `this.props` with `props`. See the [source on Github](https://github.com/unlikenesses/react-sequencer/blob/master/src/components/Pads.js) if this isn't clear.
+
+Now in `Pads` change
 
 ```javascript
 {this.state.pads.map((row, rowIndex) => {
@@ -409,7 +407,7 @@ and then in `Pads` change
 to
 
 ```javascript
-{this.props.pads.map((row, rowIndex) => {
+{props.pads.map((row, rowIndex) => {
 ```
 
 Now we've moved the `pads` state the `toggleActive` method in `Pads` won't work. Take it and move it to `App`, then add
@@ -432,11 +430,11 @@ return <Pad
     rowIndex={rowIndex} 
     id={index} 
     state={pad}
-    pos={this.props.pos}
-    toggleActive={() => this.props.toggleActive(rowIndex, index)} />
+    pos={props.pos}
+    toggleActive={() => props.toggleActive(rowIndex, index)} />
 ```
 
-You should also now remove the entire `constructor` method from `Pads`. Now everything should work as it did before, except now we have access to `pads` in our root component. This means we can now write our `checkPad` method, which simply loops through the `pads` state and calls a new method, `playSound`, if the `pad` at the current `pos` is active:
+Now everything should work as it did before, except now we have access to `pads` in our root component. This means we can now write our `checkPad` method, which simply loops through the `pads` state and calls a new method, `playSound`, if the `pad` at the current `pos` is active:
 
 ```javascript
 checkPad() {
@@ -450,10 +448,10 @@ checkPad() {
 }
 ```
 
-For simplicity's sake we're going to use the audio API to play a note depending on the row's position in the grid. Of course we could also play a sample instead. Let's set some frequencies in our state ([source](https://en.wikipedia.org/wiki/Piano_key_frequencies)):
+For simplicity's sake we're going to use the audio API to play a note depending on the row's position in the grid. Of course we could also play a sample instead. Let's set some frequencies in our constructor ([source](https://en.wikipedia.org/wiki/Piano_key_frequencies)):
 
 ```javascript
-frequencies: [261.63, 277.18, 293.66, 311.13, 329.63, 349.23, 369.99, 392]
+this.frequencies = [261.63, 277.18, 293.66, 311.13, 329.63, 349.23, 369.99, 392];
 ```
 
 Also in the `constructor` we'll initialise the audio API (since this tutorial isn't focused on the API I won't go into details here):
@@ -469,9 +467,9 @@ Then our `playSound` method, which has already been given the `rowIndex`, grabs 
 
 ```javascript
 playSound(rowIndex) {
-    var freq = this.state.frequencies[rowIndex];
-    var node = this.audioCx.createOscillator();
-    var currentTime = this.audioCx.currentTime;
+    let freq = this.frequencies[rowIndex];
+    let node = this.audioCx.createOscillator();
+    let currentTime = this.audioCx.currentTime;
     node.frequency.value = freq;
     node.detune.value = 0;
     node.type = 'sine';
@@ -494,10 +492,10 @@ The BPM control is a range `input`, which goes under the `button` tag in the `Co
         min="1" 
         max="420" 
         step="1" 
-        defaultValue={this.props.bpm} 
-        onChange={this.props.handleChange} />
+        defaultValue={props.bpm} 
+        onChange={props.handleChange} />
     <output>
-        { this.props.bpm }
+        { props.bpm }
     </output>
 </div>
 ```
