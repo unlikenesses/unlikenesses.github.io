@@ -9,8 +9,8 @@ permalink:        pretty
 title:            Unlikenesses
 tagline:          ''
 description:      ''
-url:              http://unlikenesses.github.io
-baseurl:          /
+url:              http://unlikenesses.com
+baseurl:          http://unlikenesses.com/
 
 author:
   name:           
