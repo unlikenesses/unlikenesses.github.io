@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 layout: post
 comments: true
 ---
@@ -28,7 +28,7 @@ php artisan make:model Client -m
 
 In the `clients` migration add a few fields - I've added `name`, `address` and `telephone`:
 
-```php
+```php?start_inline=true
 public function up()
 {
     Schema::create('clients', function (Blueprint $table) {
@@ -49,7 +49,7 @@ php artisan migrate
 
 And let's seed the database. First create a `ClientFactory.php` file in the `database/factories` folder. This will use [Faker](https://github.com/fzaninotto/Faker) to generate fake details for each client:
 
-```php
+```php?start_inline=true
 $factory->define(App\Client::class, function (Faker\Generator $faker) {
     static $password;
 
@@ -63,7 +63,7 @@ $factory->define(App\Client::class, function (Faker\Generator $faker) {
 
 Then in `seeds/DatabaseSeeder.php` we can call this factory in the `run` method to create 50 clients:
 
-```php
+```php?start_inline=true
 factory(App\Client::class, 50)->create();
 ```
 
@@ -79,7 +79,7 @@ php artisan make:controller FrontEndUserController
 
 I'm including a quick method to create a user so we can attempt logins:
 
-```php
+```php?start_inline=true
 public function signUp(Request $request) 
 {
     $user = User::create(['email' => $request->email, 'password' => bcrypt($request->password)]);
@@ -88,7 +88,7 @@ public function signUp(Request $request)
 
 In our `routes/api.php` file we can create a route for this and another one for when the user tries to sign in:
 
-```php
+```php?start_inline=true
 Route::post('/signup', 'FrontEndUserController@signUp');
 Route::post('/signin', 'FrontEndUserController@signIn');
 ```
@@ -97,7 +97,7 @@ If we now use Postman to make a POST request to `[project_path]/api/signup`, wit
 
 Now for the magic - the sign in method using JWT. We're just going to re-use the method giving in the [docs](https://github.com/tymondesigns/jwt-auth/wiki/Creating-Tokens) mentioned above:
 
-```php
+```php?start_inline=true
 public function signIn(Request $request) 
 {
     try {
@@ -114,7 +114,7 @@ public function signIn(Request $request)
 
 If you now POST to the `signin` route with the email and password you created before, you should get back a token similar to this:
 
-```js
+```json
 {"token":"eyJ0eXAiOiJKiV1QiLCJhbGcOiJUzI1NiJ9I.yJzdWaiOjIsImlzcyI6ImIeh0dHA6Ly9sb2hbGhvc3QvbGVhNcm4vnd0L3B1YmxpYyhcGkvMc2lnbmluIiw9iaWF0IjoxTAyMzY4NNjM0LCJleH5AiOjE1MDIzNzIyzQsImjjiZiI6MTUwMIM2ODYzNCwianRpjoiSXZzRGZCFZTNpVXVUYzVsVJ9.IYZWDWtsyIo_N-dIERPwg2Cc72XxIMVaoXbL2Yv9RUL"}
 ```
 
@@ -128,7 +128,7 @@ php artisan make:controller ClientController
 
 In that for now we'll just create an `index` method that return all clients (not ideal for an API but this tutorial is more about JWTs than developing APIs):
 
-```php
+```php?start_inline=true
 public function index() 
 {
     return Client::all();
@@ -137,7 +137,7 @@ public function index()
 
 In the `api.php` routes we'll create a new group that uses the built-in `jwt.auth` middleware:
 
-```php
+```php?start_inline=true
 Route::group(['middleware' => 'jwt.auth'], function() {
     Route::get('/clients', 'ClientController@index');
 });
@@ -145,13 +145,13 @@ Route::group(['middleware' => 'jwt.auth'], function() {
 
 We'll need to register this middleware to the `$routeMiddleware` array in `app/Http/Kernel.php`:
 
-```php
+```php?start_inline=true
 'jwt.auth' => \Tymon\JWTAuth\Middleware\GetUserFromToken::class
 ```
 
 Now if you make a GET call in Postman to `[project_path]/api/clients` you should get this error:
 
-```js
+```json
 {"error":"token_not_provided"}
 ```
 
@@ -217,7 +217,7 @@ Now we need to put that `#root` div in `home.blade.php` - put it anywhere you wa
 
 And modify the base route to point here (in `routes/web.php`):
 
-```php
+```php?start_inline=true
 Route::get('/', function () {
     return view('home');
 });
@@ -312,7 +312,7 @@ this.state = {
 
 Then in the `render` method we have a simple form (it's using some Bootstrap class names for simple styling):
 
-```js
+```html
 <form onSubmit={this.handleSubmit}>
     <div className='form-group'>
         <input
@@ -474,10 +474,10 @@ const PrivateRoute = ({ component: Component, isAuthenticated, token, ...rest })
         isAuthenticated ? (
             <Component {...props} {...rest} token={token} isAuthenticated={isAuthenticated} />
         ) : (
-            <Redirect to={{
+            <Redirect to={ {
                 pathname: '/login',
                 state: { from: props.location }
-            }} />
+            } } />
         )
     )} />
 );
@@ -640,13 +640,13 @@ Now, when a token has expired, if we try to make a call to the `clients` API end
 
 First let's set up the Laravel API side of things. We want a new endpoint, `refreshToken`. So in the `api.php` routes file, add this line under the `signup` and `signin` routes:
 
-```php
+```php?start_inline=true
 Route::get('/refreshToken', 'FrontEndUserController@refreshToken');
 ```
 
 Then in `FrontEndUserController` we'll add the `refreshToken` method:
 
-```php
+```php?start_inline=true
 public function refreshToken() 
 {
     $token = JWTAuth::getToken();
