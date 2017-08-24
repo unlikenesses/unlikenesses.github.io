@@ -152,6 +152,12 @@ case 'CHANGE_BPM': {
 }
 ```
 
+We also need to add the default state to the reducer:
+
+```javascript
+const controls = (state = { playing: false, bpm: 220 }, action) => {
+```
+
 Then add the appropriate props to `App`. In `mapStateToProps` add the new `bpm` prop:
 
 ```javascript
