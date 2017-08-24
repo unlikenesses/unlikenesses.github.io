@@ -2,6 +2,7 @@
 published: true
 layout: post
 comments: true
+title: JWTs with React and Laravel
 ---
 
 This is a tutorial on how to get [JSON Web tokens](https://jwt.io) working so that React can securely communicate with a back-end API. For the purposes of this tutorial I'll be using [Laravel](https://laravel.com) 5.4 for the back-end and [React](https://facebook.github.io/react) for the front-end. The finished code can be seen [here](https://github.com/unlikenesses/react-laravel-jwt).
