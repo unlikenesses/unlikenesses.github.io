@@ -8,7 +8,7 @@ title: Experiments
 A simple drum machine built in the major Javascript frameworks (Angular, React, AngularJS and Vue).<br>
 <a href="https://github.com/drumvc" target="_blank">Source</a>.
 
-<h3><a href="http://unlikenesses.com/react-sequencer" target="_blank">React Basic Sequencer</h3>
+<h3><a href="http://unlikenesses.com/react-sequencer" target="_blank">React Basic Sequencer</a></h3>
 
 Very basic sequencer built with React.js. <a href="https://github.com/unlikenesses/react-sequencer" target="_blank">Source</a>.
 
