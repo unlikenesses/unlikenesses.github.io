@@ -8,9 +8,15 @@ title: Experiments
 A simple drum machine built in the major Javascript frameworks (Angular, React, AngularJS and Vue).<br>
 <a href="https://github.com/drumvc" target="_blank">Source</a>.
 
+<h3><a href="http://unlikenesses.com/react-sequencer" target="_blank">React Basic Sequencer</h3>
+
+Very basic sequencer built with React.js. <a href="https://github.com/unlikenesses/react-sequencer" target="_blank">Source</a>.
+
+<a href="https://github.com/unlikenesses/react-sequencer-redux" target="_blank">Redux version</a>.
+
 <h3><a href="https://github.com/unlikenesses/react-weight-chart" target="_blank">React Weight Chart</a></h3>
 
-Weight tracker in React.js and Chart.js<br>
+Weight tracker built with React.js and Chart.js<br>
 <a href="https://github.com/unlikenesses/react-weight-chart" target="_blank">Source</a>.
 
 <h3><a href="http://unlikenesses.github.io/backbone-maze/" target="_blank">Backbone Maze</a></h3>
