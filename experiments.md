@@ -10,9 +10,8 @@ A simple drum machine built in the major Javascript frameworks (Angular, React, 
 
 <h3><a href="http://unlikenesses.com/react-sequencer" target="_blank">React Basic Sequencer</a></h3>
 
-Very basic sequencer built with React.js. <a href="https://github.com/unlikenesses/react-sequencer" target="_blank">Source</a>.
-
-<a href="https://github.com/unlikenesses/react-sequencer-redux" target="_blank">Redux version</a>.
+Very basic sequencer built with React.js.<br>
+<a href="https://github.com/unlikenesses/react-sequencer" target="_blank">Source</a>. <a href="https://github.com/unlikenesses/react-sequencer-redux" target="_blank">Redux version</a>.
 
 <h3><a href="https://github.com/unlikenesses/react-weight-chart" target="_blank">React Weight Chart</a></h3>
 
