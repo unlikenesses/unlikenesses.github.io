@@ -1,5 +1,6 @@
 const path = require("path");
 const { createFilePath } = require("gatsby-source-filesystem");
+const moment = require("moment");
 
 exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
   const { createNodeField } = boundActionCreators;
@@ -25,7 +26,7 @@ exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
     createNodeField({
       node,
       name: "date",
-      value: date
+      value: moment(date).format("DD MMMM, YYYY")
     });
   }
 };

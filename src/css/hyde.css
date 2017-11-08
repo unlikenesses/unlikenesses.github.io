@@ -172,6 +172,10 @@ a.sidebar-nav-item:focus {
   text-transform: capitalize;
 }
 
+.post-title {
+  font-size: 2rem;
+}
+
 /*
  * Themes
  *

@@ -1,5 +1,5 @@
 import React from "react";
-import moment from "moment";
+import Link from "gatsby-link";
 
 export default class extends React.Component {
   constructor(props) {
@@ -14,38 +14,21 @@ export default class extends React.Component {
     let posts = this.state.allPosts.splice(0, this.state.pagination);
     this.setState({ posts });
   }
-  getFilename(fileAbsolutePath) {
-    const parts = fileAbsolutePath.split("/");
-    return parts[parts.length - 1];
-  }
-  parseFilename(filename) {
-    let nameArr = filename.split("-");
-    let date = nameArr.splice(0, 3).join("-");
-    let title = nameArr.join(" ").replace(".md", "");
-    return { date, title };
-  }
   render() {
     // console.log(this.props.data);
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div className="posts">
         <h4>{this.props.data.allMarkdownRemark.totalCount} Posts</h4>
         {this.state.posts.map(({ node }) => {
-          let title = node.frontmatter.title;
-          let date = node.frontmatter.date;
-          if (title === "" || date === null) {
-            let parsed = this.parseFilename(
-              this.getFilename(node.fileAbsolutePath)
-            );
-            title = parsed.title;
-            date = moment(parsed.date).format("DD MMMM, YYYY");
-          }
           return (
             <div className="post" key={node.id}>
-              <h1 className="post-title">{title}</h1>
-              <span className="post-date">{date}</span>
+              <Link to={node.fields.slug} className="post-title">
+                {node.fields.title}
+              </Link>
+              <span className="post-date">{node.fields.date}</span>
               <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
-              <a href="">Read More ></a>
+              <Link to={node.fields.slug}>Read More ></Link>
             </div>
           );
         })}
@@ -68,6 +51,11 @@ export const query = graphql`
           frontmatter {
             title
             date(formatString: "DD MMMM, YYYY")
+          }
+          fields {
+            slug
+            title
+            date
           }
           excerpt
         }
