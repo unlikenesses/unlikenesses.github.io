@@ -1,5 +1,6 @@
 const path = require("path");
 const { createFilePath } = require("gatsby-source-filesystem");
+const createPaginatedPages = require("gatsby-paginate");
 const moment = require("moment");
 
 exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
@@ -36,17 +37,30 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   return new Promise((resolve, reject) => {
     graphql(`
       {
-        allMarkdownRemark {
+        allMarkdownRemark(
+          sort: { fields: [fileAbsolutePath], order: DESC }
+          filter: { frontmatter: { published: { eq: true } } }
+        ) {
           edges {
             node {
+              id
               fields {
                 slug
+                title
+                date
               }
+              excerpt
             }
           }
         }
       }
     `).then(result => {
+      createPaginatedPages({
+        edges: result.data.allMarkdownRemark.edges,
+        createPage: createPage,
+        pageTemplate: "src/templates/index.js",
+        pageLength: 3
+      });
       result.data.allMarkdownRemark.edges.map(({ node }) => {
         createPage({
           path: node.fields.slug,
