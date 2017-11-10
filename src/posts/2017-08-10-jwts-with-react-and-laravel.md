@@ -30,7 +30,7 @@ php artisan make:model Client -m
 
 In the `clients` migration add a few fields - I've added `name`, `address` and `telephone`:
 
-```php?start_inline=true
+```php
 public function up()
 {
     Schema::create('clients', function (Blueprint $table) {
@@ -51,7 +51,7 @@ php artisan migrate
 
 And let's seed the database. First create a `ClientFactory.php` file in the `database/factories` folder. This will use [Faker](https://github.com/fzaninotto/Faker) to generate fake details for each client:
 
-```php?start_inline=true
+```php
 $factory->define(App\Client::class, function (Faker\Generator $faker) {
     static $password;
 
@@ -65,7 +65,7 @@ $factory->define(App\Client::class, function (Faker\Generator $faker) {
 
 Then in `seeds/DatabaseSeeder.php` we can call this factory in the `run` method to create 50 clients:
 
-```php?start_inline=true
+```php
 factory(App\Client::class, 50)->create();
 ```
 
@@ -81,7 +81,7 @@ php artisan make:controller FrontEndUserController
 
 I'm including a quick method to create a user so we can attempt logins:
 
-```php?start_inline=true
+```php
 public function signUp(Request $request)
 {
     $user = User::create(['email' => $request->email, 'password' => bcrypt($request->password)]);
@@ -90,7 +90,7 @@ public function signUp(Request $request)
 
 In our `routes/api.php` file we can create a route for this and another one for when the user tries to sign in:
 
-```php?start_inline=true
+```php
 Route::post('/signup', 'FrontEndUserController@signUp');
 Route::post('/signin', 'FrontEndUserController@signIn');
 ```
@@ -99,7 +99,7 @@ If we now use Postman to make a POST request to `[project_path]/api/signup`, wit
 
 Now for the magic - the sign in method using JWT. We're just going to re-use the method giving in the [docs](https://github.com/tymondesigns/jwt-auth/wiki/Creating-Tokens) mentioned above:
 
-```php?start_inline=true
+```php
 public function signIn(Request $request)
 {
     try {
@@ -116,7 +116,7 @@ public function signIn(Request $request)
 
 If you now POST to the `signin` route with the email and password you created before, you should get back a token similar to this:
 
-```json
+```javascripton
 {"token":"eyJ0eXAiOiJKiV1QiLCJhbGcOiJUzI1NiJ9I.yJzdWaiOjIsImlzcyI6ImIeh0dHA6Ly9sb2hbGhvc3QvbGVhNcm4vnd0L3B1YmxpYyhcGkvMc2lnbmluIiw9iaWF0IjoxTAyMzY4NNjM0LCJleH5AiOjE1MDIzNzIyzQsImjjiZiI6MTUwMIM2ODYzNCwianRpjoiSXZzRGZCFZTNpVXVUYzVsVJ9.IYZWDWtsyIo_N-dIERPwg2Cc72XxIMVaoXbL2Yv9RUL"}
 ```
 
@@ -130,7 +130,7 @@ php artisan make:controller ClientController
 
 In that for now we'll just create an `index` method that return all clients (not ideal for an API but this tutorial is more about JWTs than developing APIs):
 
-```php?start_inline=true
+```php
 public function index()
 {
     return Client::all();
@@ -139,7 +139,7 @@ public function index()
 
 In the `api.php` routes we'll create a new group that uses the built-in `jwt.auth` middleware:
 
-```php?start_inline=true
+```php
 Route::group(['middleware' => 'jwt.auth'], function() {
     Route::get('/clients', 'ClientController@index');
 });
@@ -147,13 +147,13 @@ Route::group(['middleware' => 'jwt.auth'], function() {
 
 We'll need to register this middleware to the `$routeMiddleware` array in `app/Http/Kernel.php`:
 
-```php?start_inline=true
+```php
 'jwt.auth' => \Tymon\JWTAuth\Middleware\GetUserFromToken::class
 ```
 
 Now if you make a GET call in Postman to `[project_path]/api/clients` you should get this error:
 
-```json
+```javascripton
 {"error":"token_not_provided"}
 ```
 
@@ -169,7 +169,7 @@ npm install --save react react-dom
 
 Now remove any references to Vue (this won't be necessary in Laravel 5.5). Delete `Example.vue` from the `resources/assets/js/components` folder. Then in `resources/assets/js/app.js`, replace all the VueJS code with this:
 
-```js
+```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
@@ -183,7 +183,7 @@ ReactDOM.render(
 
 This simply imports the React modules, imports our root component and attaches it to a `div` with the id `root` on our homepage. So now create the `components/App.js` file and put some temporary code there:
 
-```js
+```javascript
 import React from 'react';
 
 class App extends React.Component {
@@ -219,7 +219,7 @@ Now we need to put that `#root` div in `home.blade.php` - put it anywhere you wa
 
 And modify the base route to point here (in `routes/web.php`):
 
-```php?start_inline=true
+```php
 Route::get('/', function () {
     return view('home');
 });
@@ -227,7 +227,7 @@ Route::get('/', function () {
 
 Now to compile the React code with Laravel's Mix we need to modify the `webpack.mix.js` file:
 
-```js
+```javascript
 mix.react('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');
 ```
@@ -242,13 +242,13 @@ For this example the React app will have 3 pages: Home, Login and Clients. We'll
 
 First let's install the router: `npm install react-router-dom --save`. Then in `App.js` we can import the modules we need:
 
-```js
+```javascript
 import { HashRouter, Route, Switch, NavLink, Redirect } from 'react-router-dom';
 ```
 
 Now we re-write its `render` method. We'll use react-router's `HashRouter` to contain our routes -- see their documentation for more info:
 
-```js
+```javascript
 <HashRouter>
     <div>
         <Menu />
@@ -286,14 +286,14 @@ const Menu = (props) => (
 
 The `Clients` link is in there but we can ignore it for now. One last thing in `App.js`: import the `Home` and `Login` components:
 
-```js
+```javascript
 import Home from './Home';
 import Login from './Login';
 ```
 
 Now let's create the `Home` component - it can really be anything you like. My one just prints the word "Home":
 
-```js
+```javascript
 import React from 'react';
 
 const Home = () => (
@@ -305,7 +305,7 @@ export default Home;
 
 The `Login` component is more interesting. Create a basic React class. This will be what React calls a ["controlled component"](https://facebook.github.io/react/docs/forms.html), i.e. a component containing a form with fields whose values are controlled by the component's state. So in our component's constructor, let's set up the intial form state (there'll be 2 fields, `email` and `password`):
 
-```js
+```javascript
 this.state = {
     email: '',
     password: ''
@@ -342,7 +342,7 @@ Then in the `render` method we have a simple form (it's using some Bootstrap cla
 
 As you can see there's an `email` field and a `password` field, both of whose values are set by the component's state. Both fields also have an `onChange` attribute, which calls the component's `handleChange` method. This will simply update the state when the user types in a given field:
 
-```js
+```javascript
 handleChange(event) {
     const name = event.target.name;
     this.setState({
@@ -353,13 +353,13 @@ handleChange(event) {
 
 Because it checks for the field's `name` attribute we can use the same method for both input fields. Don't forget to add this method to the constructor:
 
-```js
+```javascript
 this.handleChange = this.handleChange.bind(this);
 ```
 
 We also have an `onSubmit` attribute for the form, which calls a method called `handleSubmit`. We want this to call the Laravel `api/signin` route we created earlier. We can use [Axios](https://github.com/mzabriskie/axios) for this since it's already part of Laravel's `package.json`:
 
-```js
+```javascript
 handleSubmit(event) {
     event.preventDefault();
     axios.post('/api/signin', {
@@ -380,7 +380,7 @@ All this does is `POST` the component's email and password state to our endpoint
 
 Somewhere we'll need to keep track of whether a user is logged in or not. We can do that in a number of ways - for the purposes of this project I'll keep it simple and use the `App` component's state. So in its constructor, add this:
 
-```js
+```javascript
 this.state = {
     isAuthenticated: false,
     token: null
@@ -389,7 +389,7 @@ this.state = {
 
 We'll also need a method to set these properties when a login is successful (this is also in `App`):
 
-```js
+```javascript
 authenticate(token) {
     this.setState({
         isAuthenticated: true,
@@ -402,13 +402,13 @@ authenticate(token) {
 
 Now we can pass these as properties to the `Login` component:
 
-```js
+```javascript
 <Route exact path='/login' render={(props) => <Login authenticate={this.authenticate} isAuthenticated={this.state.isAuthenticated} {...props} />} />
 ```
 
 Now in the `Login` component we can modify the `axios` call to pass the token to the parent's `authenticate` method:
 
-```js
+```javascript
 .then((response) => {
     const token = response.data.token;
     this.props.authenticate(token);
@@ -417,7 +417,7 @@ Now in the `Login` component we can modify the `axios` call to pass the token to
 
 While we're here we can also check to see if a user is logged in and not display the form if so:
 
-```js
+```javascript
 {this.props.isAuthenticated ?
     <p>You are already logged in.</p>
     :
@@ -429,7 +429,7 @@ While we're here we can also check to see if a user is logged in and not display
 
 Finally let's add a `Logout` link to the menu:
 
-```js
+```javascript
 {props.isAuthenticated ?
     <li>
         <a onClick={props.logout}>
@@ -443,13 +443,13 @@ Finally let's add a `Logout` link to the menu:
 
 This will check if `isAuthenticated` is `true` - if so, show the Logout link with an `onClick` handler. We'll need to pass these properties to the `Menu` in the router:
 
-```js
+```javascript
 <Menu isAuthenticated={this.state.isAuthenticated} logout={this.logout} />
 ```
 
 ...and create the `logout` method in `App`:
 
-```js
+```javascript
 logout() {
     this.setState({
         isAuthenticated: false,
@@ -464,13 +464,13 @@ As you can see this just resets the state to its original values. As usual, bind
 
 We have a link to the `clients` page in our menu, but we haven't set up the route or the component yet. For creating private routes (i.e. routes that can only be accessed by logged-in users) I'm following the example in the official [react-router documentation](https://reacttraining.com/react-router/web/example/auth-workflow). This uses a bespoke `PrivateRoute` component which will either display the component passed to it (in our case, `Clients`) or, if not logged in, it will redirect to a given route. My version is the same but with a couple of small tweaks. First let's set up the route in the `App` component:
 
-```js
+```javascript
 <PrivateRoute exact path='/clients' component={Clients} isAuthenticated={this.state.isAuthenticated} token={this.state.token} />
 ```
 
 And here's my version of the `PrivateRoute` component (which I also place in `App.js`):
 
-```js
+```javascript
 const PrivateRoute = ({ component: Component, isAuthenticated, token, ...rest }) => (
     <Route {...rest} render={props => (
         isAuthenticated ? (
@@ -487,7 +487,7 @@ const PrivateRoute = ({ component: Component, isAuthenticated, token, ...rest })
 
 It's not the most readable of code so I'll go through it bit by bit. The first thing to note is the arguments it takes:
 
-```js
+```javascript
 ({ component: Component, isAuthenticated, token, ...rest })
 ```
 
@@ -497,7 +497,7 @@ Moving into the body of the component itself, it's comprised of a single `<Route
 
 Now we can add a private route pointing to the `Clients` component. Add this line within the `Switch` block:
 
-```js
+```javascript
 <PrivateRoute exact path='/clients' component={Clients} isAuthenticated={this.state.isAuthenticated} token={this.state.token} />
 ```
 
@@ -507,7 +507,7 @@ This passes the three props - `component`, `isAuthenticated` and `token` - to th
 
 Create a new React component called `Clients`. We'll need some state to hold the clients, so let's put that in the constructor:
 
-```js
+```javascript
 constructor() {
     super();
     this.state = {
@@ -518,7 +518,7 @@ constructor() {
 
 Our `render` method is pretty simple - we just `map` over the `clients` array and print out each client's details:
 
-```js
+```javascript
 render() {
     return (
         <div>
@@ -540,7 +540,7 @@ render() {
 
 Now we just need to make a call to the API when the component mounts to request the clients. We'll use Axios again, and pass the `Authorization` headers:
 
-```js
+```javascript
 componentWillMount() {
     this.getClients();
 }
@@ -566,13 +566,13 @@ As you can see we grab the `token` from the component's `props`, and if the call
 
 There's more to do, but first let's tidy a few things up. First, it would be good if, on a successful login, the Login component redirected to the page the user originally tried to access. Again this code is heavily indebted to the [official docs](https://reacttraining.com/react-router/web/example/auth-workflow) for React-Router. All we need to do is add a check at the beginning of the `render` method of the `Login` component. If we're already logged in, and if we have a `location` property (i.e. if we've been redirected here from another, protected, page), then just render a `Redirect` component pointing to that page. First import the `Redirect` component at the top of the `Login` component:
 
-```js
+```javascript
 import { Redirect } from 'react-router-dom';
 ```
 
 Then at the beginning of the `render` method, add this conditional:
 
-```js
+```javascript
 if (this.props.isAuthenticated && this.props.location.state !== undefined) {
     return (
         <Redirect to={this.props.location.state.from} />
@@ -594,7 +594,7 @@ return response()->json(['error' => 'invalid_credentials'], 401);
 
 `401` is the HTTP status code that means [`Unauthorized`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401). So in our `axios` call we could check for this code and if it's present show an appropriate error message. First let's add an `error` property to the `state` of `Login`:
 
-```js
+```javascript
 this.state = {
     email: '',
     password: '',
@@ -604,7 +604,7 @@ this.state = {
 
 Then we can change the `catch` part of our `axios` call to check for the `401` status, and update the `error` state accordingly:
 
-```js
+```javascript
 .catch((error) => {
     const status = error.response.status
     if (status === 401) {
@@ -615,7 +615,7 @@ Then we can change the `catch` part of our `axios` call to check for the `401` s
 
 Finally in our `render` method we check to see if the error is an empty string - if not just display it in a `p` tag with a Bootstrap css helper class:
 
-```js
+```javascript
 <h1>Login</h1>
 {this.state.error !== '' ?
     <p className="text-danger">{this.state.error}</p>
@@ -626,7 +626,7 @@ Finally in our `render` method we check to see if the error is an empty string -
 
 Now when you try to log in with false credentials you will get this message. But we do need to reset it when login is successful otherwise the message will remain on the screen. So add a line to do this just before we authenticate:
 
-```js
+```javascript
 .then((response) => {
     this.setState({ error: '' });
     const token = response.data.token;
@@ -642,13 +642,13 @@ Now, when a token has expired, if we try to make a call to the `clients` API end
 
 First let's set up the Laravel API side of things. We want a new endpoint, `refreshToken`. So in the `api.php` routes file, add this line under the `signup` and `signin` routes:
 
-```php?start_inline=true
+```php
 Route::get('/refreshToken', 'FrontEndUserController@refreshToken');
 ```
 
 Then in `FrontEndUserController` we'll add the `refreshToken` method:
 
-```php?start_inline=true
+```php
 public function refreshToken()
 {
     $token = JWTAuth::getToken();
@@ -667,7 +667,7 @@ This is pretty self-explanatory - get the current token, try to refresh it and i
 
 Now, back on the client-side, we need to update our `getClients` method to make that check I talked about at the start of this section. So at the end of the `axios` call add this `catch` method:
 
-```js
+```javascript
 .catch((error) => {
     const status = error.response.status;
     if (status === 401 && this.props.isAuthenticated) {
@@ -679,7 +679,7 @@ Now, back on the client-side, we need to update our `getClients` method to make 
 
 This just checks that we're getting a `401` status response and that the user has been authenticated: if so, call a `refresh` method that sits in the parent component. Now go to the `App` component and add this method:
 
-```js
+```javascript
 refresh() {
     return axios.get('/api/refreshToken', {
         headers: { 'Authorization': 'Bearer ' + this.state.token }
@@ -698,7 +698,7 @@ refresh() {
 
 So back in the `Clients` component, add this hook:
 
-```js
+```javascript
 componentDidUpdate(prevProps, prevState) {
     if (prevProps.token !== this.props.token) {
         this.getClients();
@@ -712,13 +712,13 @@ All this does is to see if the new token property is different from the previous
 
 As the app currently stands, if you refresh the page the token will be erased and the user will have to log in again. We need a way to persist the token between sessions - for this we'll use [localStorage](https://developer.mozilla.org/en/docs/Web/API/Window/localStorage). We need to give the value a key name - let's call it `jwt`. In the `authenticate` method in `App.js` we just need to use the `localStorage.setItem` command to persist the token to the browser:
 
-```js
+```javascript
 localStorage.setItem('jwt', token);
 ```
 
 You can check the token's being saved using the Chrome (under Application -> Local Storage) or Firefox (under Storage) dev-tools. Now, whenever the app loads, all we need to do is to check `localStorage` for the `jwt` key, and if it exists set its value to be our app's token. As usual we can do this with the `componentWillMount` lifecycle hook:
 
-```js
+```javascript
 componentWillMount() {
     const lsToken = localStorage.getItem('jwt');
     if (lsToken) {

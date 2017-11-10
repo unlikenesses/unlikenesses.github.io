@@ -12,6 +12,7 @@
     "gatsby-link": "^1.6.22",
     "gatsby-paginate": "^1.0.6",
     "gatsby-plugin-google-fonts": "0.0.3",
+    "gatsby-remark-prismjs": "^1.2.9",
     "gatsby-source-filesystem": "^1.5.8",
     "gatsby-transformer-remark": "^1.7.19"
   }

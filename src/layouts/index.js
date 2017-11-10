@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "gatsby-link";
 import Sidebar from "./sidebar";
+import "prismjs/themes/prism-tomorrow.css";
 import "../css/poole.css";
 import "../css/syntax.css";
 import "../css/hyde.css";
