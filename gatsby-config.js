@@ -1,6 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Unlikenesses`,
+    description: '',
     pagination: 5
   },
   plugins: [

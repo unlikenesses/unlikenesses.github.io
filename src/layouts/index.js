@@ -8,16 +8,34 @@ import "../css/hyde.css";
 
 export default ({ children, data }) => (
   <div className="theme-base-08">
-    <Sidebar title={data.site.siteMetadata.title} />
+    <Sidebar
+      title={data.site.siteMetadata.title}
+      description={data.site.siteMetadata.description}
+      pages={data.allMarkdownRemark.edges}
+    />
     <div className="content container">{children()}</div>
   </div>
 );
 
 export const query = graphql`
-  query AboutQuery {
+  query SidebarQuery {
     site {
       siteMetadata {
         title
+        description
+      }
+    }
+    allMarkdownRemark(
+      sort: { fields:  [frontmatter___title]}
+      filter: { frontmatter: { layout: { eq: "page" } } }
+    ) {
+      edges {
+        node {
+          fields {
+            title
+            slug
+          }
+        }
       }
     }
   }

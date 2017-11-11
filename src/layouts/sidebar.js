@@ -1,22 +1,35 @@
 import React from "react";
+import Link from "gatsby-link";
 
-export default ({ title }) => (
+export default ({ title, description, pages }) => (
   <div className="sidebar">
     <div className="container sidebar-sticky">
       <div className="sidebar-about">
         <h1>
           <a href="{{ site.baseurl }}">{title}</a>
         </h1>
-        <p className="lead">site</p>
+        <p className="lead">{description}</p>
       </div>
 
       <nav className="sidebar-nav">
-        <a
-          className="sidebar-nav-item{% if page.url == site.baseurl %} active{% endif %}"
-          href="/"
+        <Link
+          className="sidebar-nav-item"
+          to="/"
         >
           Blog
-        </a>
+        </Link>
+        
+        {pages.map((page, idx) => {
+          return (
+            <Link
+              className="sidebar-nav-item"
+              to={page.node.fields.slug}
+              key={idx}
+            >
+              {page.node.fields.title}
+            </Link>
+          );
+        })}
 
         <a
           className="sidebar-nav-item"

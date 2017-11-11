@@ -6,7 +6,11 @@ const moment = require("moment");
 exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
   const { createNodeField } = boundActionCreators;
   if (node.internal.type === "MarkdownRemark") {
-    const slug = createFilePath({ node, getNode, basePath: "posts" });
+    let basePath = "posts";
+    if (node.frontmatter.layout === "page") {
+      basePath = "pages";
+    }
+    const slug = createFilePath({ node, getNode, basePath });
     let title = node.frontmatter.title;
     let date = node.frontmatter.date;
     if (title === "" || date === null) {
@@ -24,11 +28,13 @@ exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
       name: "title",
       value: title
     });
-    createNodeField({
-      node,
-      name: "date",
-      value: moment(date).format("DD MMMM, YYYY")
-    });
+    if (node.frontmatter.layout !== "page") {
+      createNodeField({
+        node,
+        name: "date",
+        value: moment(date).format("DD MMMM, YYYY")
+      });
+    }
   }
 };
 
@@ -49,6 +55,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 title
                 date
               }
+              frontmatter {
+                layout
+              }
               excerpt
             }
           }
@@ -62,9 +71,13 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         pageLength: 3
       });
       result.data.allMarkdownRemark.edges.map(({ node }) => {
+        let component = "post.js";
+        if (node.frontmatter.layout === "page") {
+          component = "page.js";
+        }
         createPage({
           path: node.fields.slug,
-          component: path.resolve("./src/pages/post.js"),
+          component: path.resolve("./src/templates/" + component),
           context: {
             // Data passed to context is available in page queries as GraphQL variables.
             slug: node.fields.slug
