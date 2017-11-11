@@ -22,7 +22,7 @@ php artisan make:command [name-of-command]
 
 and [add it](https://laravel.com/docs/5.4/artisan#registering-commands) to `app/Console/Kernel.php`. From there we can fill in the `signature`: 'crud:make {name}', and start to flesh out the `handle` method:
 
-```php?start_inline=true
+```php
 public function handle()
 {
     $this->name = $this->argument('name');
@@ -44,7 +44,7 @@ public function handle()
 
 This bit's also straightforward. We want it so that when we run `crud:make` a model, controller etc are created. The model and migration are the easiest because an `artisan` command already exists for that. So again, following [the manual](https://laravel.com/docs/5.4/artisan#programmatically-executing-commands), we arrive at:
 
-```php?start_inline=true
+```php
 protected function makeModel()
 {
     $this->call('make:model', ['name' => $this->name, '-m' => true]);
@@ -57,7 +57,7 @@ This calls the `artisan make:model` command and the `-m` flag means that it shou
 
 This is a bit more tricky. We could just use the `artisan make:controller` command, but we want some boilerplate already in there (the various CRUD commands). The answer is to create a `controller.stub` - basically a template of how we want the controller to look - and to inject our new resource's name at the appropriate points. This can be done easily with `str_replace`. So `makeController` looks a bit like this:
 
-```php?start_inline=true
+```php
 protected function makeController()
 {
     $controllerName = $this->name . 'Controller.php';
@@ -73,7 +73,7 @@ First we create the target name of the controller, which will be the resource's 
 
 The `controller.stub` file is basically a resource controller with the methods partially filled in. I won't give the whole file - that will vary from app to app - but for me, the class and `index` method look like this:
 
-```php?start_inline=true
+```php
 namespace App\Http\Controllers;
 
 use App\{{name}};
@@ -97,7 +97,7 @@ class {{name}}Controller extends Controller
 
 I use the convention of two curly brackets to specify the placeholders where the name will be injected: `{{ "{{name" }}}}` and `{{ "{{routeName" }}}}`. So if our resource is called `Post`, the above would resolve to:
 
-```php?start_inline=true
+```php
 namespace App\Http\Controllers;
 
 use App\Post;
@@ -121,7 +121,7 @@ class PostController extends Controller
 
 This replacement occurs in my `compileStub` method:
 
-```php?start_inline=true
+```php
 protected function compileStub($stub)
 {
     return str_replace(
@@ -146,7 +146,7 @@ This rather ungainly code replaces all instances of `{{ "{{name" }}}}` with the 
 
 This follows a similar principle to the previous step: I have a stub file (`routes.stub`) which contains the generic routes for a resource:
 
-```php?start_inline=true
+```php
 Route::get('/{{ "{{routeName" }}}}', '{{ "{{name" }}}}Controller@index');
 Route::get('/{{ "{{routeName" }}}}/create', '{{ "{{name" }}}}Controller@create');
 Route::post('/{{ "{{routeName" }}}}', '{{ "{{name" }}}}Controller@store');
@@ -158,7 +158,7 @@ Route::delete('/{{ "{{routeName" }}}}/{{ "{{{argName" }}}}}', '{{ "{{name" }}}}C
 
 I then replace the placeholders with the resource's name but this time instead of creating a new file I append this to the end of my existing admin routes file:
 
-```php?start_inline=true
+```php
 protected function makeRoutes()
 {
     file_put_contents(

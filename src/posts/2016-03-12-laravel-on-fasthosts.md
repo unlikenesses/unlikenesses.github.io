@@ -27,7 +27,7 @@ Normally you would upload your web site to `htdocs`, but with Laravel things are
 
 Before uploading it was necessary to make a small change to the `public/index.php` file. I changed the first two lines to:
 
-```php?start_inline=true
+```php
 require __DIR__.'/../app_base/bootstrap/autoload.php';
 $app = require_once __DIR__.'/../app_base/bootstrap/app.php';
 ```

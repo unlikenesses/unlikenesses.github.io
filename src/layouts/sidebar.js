@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "gatsby-link";
+import moment from "moment";
 
 export default ({ title, description, pages }) => (
   <div className="sidebar">
@@ -12,13 +13,10 @@ export default ({ title, description, pages }) => (
       </div>
 
       <nav className="sidebar-nav">
-        <Link
-          className="sidebar-nav-item"
-          to="/"
-        >
+        <Link className="sidebar-nav-item" to="/">
           Blog
         </Link>
-        
+
         {pages.map((page, idx) => {
           return (
             <Link
@@ -54,7 +52,7 @@ export default ({ title, description, pages }) => (
         </a>
       </nav>
 
-      <p>&copy; fsd</p>
+      <p>&copy; {moment().format("YYYY")}</p>
     </div>
   </div>
 );

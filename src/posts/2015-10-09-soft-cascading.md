@@ -10,13 +10,13 @@ Imagine I have two tables, `employers` and `employees`. `employees` is a child t
 
 This works fine. But what if I want to implement soft-deletes? I am using Jamie Rumbelow's [base model](https://github.com/jamierumbelow/codeigniter-base-model). It's very easy to set up soft deletes. In `MY_Model`, set
 
-```php?start_inline=true
+```php
 protected $soft_delete = TRUE;
 ```
 
 and
 
-```php?start_inline=true
+```php
 protected $soft_delete_key
 ```
 
@@ -34,7 +34,7 @@ So if I go ahead and create a similar function called `set_belongs_to` in my `Ad
 
 Admin model:
 
-```php?start_inline=true
+```php
 public function set_belongs_to($table)
 {
     $this->belongs_to[] = $table;
@@ -43,13 +43,13 @@ public function set_belongs_to($table)
 	
 Employees controller:
 
-```php?start_inline=true
+```php
 $this->Admin_model->set_belongs_to('employers');
 ```
 
 I can then finally write the `cascade_soft_delete` method. It's very simple:
 
-```php?start_inline=true
+```php
 public function cascade_soft_delete($row)
 {
     $table = $this->table;

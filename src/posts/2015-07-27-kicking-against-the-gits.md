@@ -12,25 +12,27 @@ Determined with a bloody-minded obstinacy to move away from such evils, I did so
 
 I've only just got it working, and its documentation isn't great, but from the looks of things I think this is going to save me a lot of time in the future. I had a couple of problems installing. In the repo's [install doc](https://github.com/git-ftp/git-ftp/blob/develop/INSTALL.md) we have these instructions:
 
-{% highlight bash %}
+```
 $ cd ~
 $ git clone https://github.com/git-ftp/git-ftp
 $ cd git-ftp && chmod +x git-ftp
 $ cd /bin
 $ ln -s ~/git-ftp/git-ftp
-{% endhighlight %}
+```
 
 All of this was fine apart from the last line. I'm still learning the command line so I'm not familiar with symbolic linking, but in any case what I had to do instead was this:
 
-    cp ~/git-ftp.git/git-ftp /bin/git-ftp
+```
+cp ~/git-ftp.git/git-ftp /bin/git-ftp
+```
     
 And I was able to access `git ftp` from anywhere. After that, I went into my new project's folder, ran a `git init`, then a `git add .` and an initial `git commit`. The next thing was to set up the **git-ftp** config: I opened `.git/config` in Notepad++ and added the following four lines:
-{% highlight bash %}
+```
 [git-ftp]
 	user = username
 	password = password
 	url = ftp.example.com/public_html/
-{% endhighlight %}
+```
 
 Where `user` and `password` are the authentication details for my server's FTP.
 
