@@ -3,8 +3,8 @@ import Link from "gatsby-link";
 import Sidebar from "./sidebar";
 import "prismjs/themes/prism-tomorrow.css";
 import "../css/poole.css";
-import "../css/syntax.css";
 import "../css/hyde.css";
+import "../css/mailchimp.css";
 
 export default ({ children, data }) => (
   <div className="theme-base-08">
