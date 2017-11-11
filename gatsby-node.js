@@ -49,16 +49,27 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         ) {
           edges {
             node {
-              id
               fields {
-                slug
                 title
                 date
+                slug
               }
               frontmatter {
                 layout
               }
               excerpt
+            }
+            next{
+              fields {
+                title
+                slug
+              }
+            } 
+            previous {
+              fields {
+                title
+                slug
+              }
             }
           }
         }
@@ -70,7 +81,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         pageTemplate: "src/templates/index.js",
         pageLength: 3
       });
-      result.data.allMarkdownRemark.edges.map(({ node }) => {
+      result.data.allMarkdownRemark.edges.map(({ node, next, previous }) => {
         let component = "post.js";
         if (node.frontmatter.layout === "page") {
           component = "page.js";
@@ -79,7 +90,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           path: node.fields.slug,
           component: path.resolve("./src/templates/" + component),
           context: {
-            slug: node.fields.slug
+            slug: node.fields.slug,
+            prev: next,
+            next: previous
           }
         });
       });
