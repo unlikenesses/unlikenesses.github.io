@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "gatsby-link";
-import ReactDisqusComments from "react-disqus-comments";
 
 export default ({ data, pathContext }) => {
   const post = data.post;
@@ -29,11 +28,6 @@ export default ({ data, pathContext }) => {
           </h3>
         ) : null}
       </div>
-      <ReactDisqusComments
-        shortname="unlikenesses"
-        identifier="react-disqus-thread"
-        title="React Disqus thread component"
-      />
     </div>
   );
 };
@@ -45,6 +39,7 @@ export const query = graphql`
       fields {
         title
         date
+        url
       }
     }
   }

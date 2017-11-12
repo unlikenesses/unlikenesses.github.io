@@ -34,6 +34,11 @@ exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
         name: "date",
         value: moment(date).format("DD MMMM, YYYY")
       });
+      createNodeField({
+        node,
+        name: "url",
+        value: "http://unlikenesses.com" + slug
+      });
     }
   }
 };
@@ -98,6 +103,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           path: node.fields.slug,
           component: path.resolve("./src/templates/post.js"),
           context: {
+            slug: node.fields.slug,
             prev: next,
             next: previous
           }
@@ -106,7 +112,10 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
       result.data.pages.edges.map(({ node }) => {
         createPage({
           path: node.fields.slug,
-          component: path.resolve("./src/templates/page.js")
+          component: path.resolve("./src/templates/page.js"),
+          context: {
+            slug: node.fields.slug
+          }
         });
       });
       resolve();
