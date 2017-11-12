@@ -13,24 +13,20 @@ export default ({ data, pathContext }) => {
       </div>
       <div className="related">
         {pathContext.prev ? (
-          <div>
-            <h3>
-              Previous:{" "}
-              <Link to={pathContext.prev.fields.slug}>
-                {pathContext.prev.fields.title}
-              </Link>
-            </h3>
-          </div>
+          <h3>
+            Previous:{" "}
+            <Link to={pathContext.prev.fields.slug}>
+              {pathContext.prev.fields.title}
+            </Link>
+          </h3>
         ) : null}
         {pathContext.next ? (
-          <div>
-            <h3>
-              Next:{" "}
-              <Link to={pathContext.next.fields.slug}>
-                {pathContext.next.fields.title}
-              </Link>
-            </h3>
-          </div>
+          <h3>
+            Next:{" "}
+            <Link to={pathContext.next.fields.slug}>
+              {pathContext.next.fields.title}
+            </Link>
+          </h3>
         ) : null}
       </div>
       <ReactDisqusComments

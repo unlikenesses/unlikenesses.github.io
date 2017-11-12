@@ -7,7 +7,7 @@ export default ({ title, description, pages }) => (
     <div className="container sidebar-sticky">
       <div className="sidebar-about">
         <h1>
-          <a href="{{ site.baseurl }}">{title}</a>
+          <Link to="/">{title}</Link>
         </h1>
         <p className="lead">{description}</p>
       </div>

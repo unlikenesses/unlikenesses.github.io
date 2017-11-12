@@ -43,9 +43,11 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   return new Promise((resolve, reject) => {
     graphql(`
       {
-        allMarkdownRemark(
+        posts: allMarkdownRemark(
           sort: { fields: [fileAbsolutePath], order: DESC }
-          filter: { frontmatter: { published: { eq: true } } }
+          filter: {
+            frontmatter: { published: { eq: true }, layout: { eq: "post" } }
+          }
         ) {
           edges {
             node {
@@ -54,18 +56,28 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 date
                 slug
               }
-              frontmatter {
-                layout
-              }
               excerpt
             }
-            next{
+            next {
               fields {
                 title
                 slug
               }
-            } 
+            }
             previous {
+              fields {
+                title
+                slug
+              }
+            }
+          }
+        }
+        pages: allMarkdownRemark(
+          sort: { fields: [fileAbsolutePath], order: DESC }
+          filter: { frontmatter: { published: { eq: true }, layout: { eq: "page" } } }
+        ) {
+          edges {
+            node {
               fields {
                 title
                 slug
@@ -76,24 +88,25 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
       }
     `).then(result => {
       createPaginatedPages({
-        edges: result.data.allMarkdownRemark.edges,
+        edges: result.data.posts.edges,
         createPage: createPage,
         pageTemplate: "src/templates/index.js",
         pageLength: 3
       });
-      result.data.allMarkdownRemark.edges.map(({ node, next, previous }) => {
-        let component = "post.js";
-        if (node.frontmatter.layout === "page") {
-          component = "page.js";
-        }
+      result.data.posts.edges.map(({ node, next, previous }) => {
         createPage({
           path: node.fields.slug,
-          component: path.resolve("./src/templates/" + component),
+          component: path.resolve("./src/templates/post.js"),
           context: {
-            slug: node.fields.slug,
             prev: next,
             next: previous
           }
+        });
+      });
+      result.data.pages.edges.map(({ node }) => {
+        createPage({
+          path: node.fields.slug,
+          component: path.resolve("./src/templates/page.js")
         });
       });
       resolve();
