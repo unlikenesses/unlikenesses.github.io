@@ -66,12 +66,14 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             next {
               fields {
                 title
+                date
                 slug
               }
             }
             previous {
               fields {
                 title
+                date
                 slug
               }
             }

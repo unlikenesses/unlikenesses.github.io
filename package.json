@@ -5,7 +5,9 @@
   "scripts": {
     "develop": "gatsby develop",
     "build": "gatsby build",
-    "serve": "gatsby serve"
+    "serve": "gatsby serve",
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public -b master",
+    "help": "gh-pages --help"
   },
   "dependencies": {
     "gatsby": "^1.9.73",
@@ -16,5 +18,8 @@
     "gatsby-remark-prismjs": "^1.2.9",
     "gatsby-source-filesystem": "^1.5.8",
     "gatsby-transformer-remark": "^1.7.19"
+  },
+  "devDependencies": {
+    "gh-pages": "^1.0.0"
   }
 }

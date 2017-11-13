@@ -1,6 +1,17 @@
 import React from "react";
 import Link from "gatsby-link";
 
+const RelatedPost = ({ type, slug, title, date }) => (
+  <li>
+    <h3>
+      {type}:{" "}
+      <Link to={slug}>
+        {title} <small>{date}</small>
+      </Link>
+    </h3>
+  </li>
+);
+
 export default ({ data, pathContext }) => {
   const post = data.post;
   return (
@@ -11,22 +22,14 @@ export default ({ data, pathContext }) => {
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
       </div>
       <div className="related">
-        {pathContext.prev ? (
-          <h3>
-            Previous:{" "}
-            <Link to={pathContext.prev.fields.slug}>
-              {pathContext.prev.fields.title}
-            </Link>
-          </h3>
-        ) : null}
-        {pathContext.next ? (
-          <h3>
-            Next:{" "}
-            <Link to={pathContext.next.fields.slug}>
-              {pathContext.next.fields.title}
-            </Link>
-          </h3>
-        ) : null}
+        <ul className="related-posts">
+          {pathContext.prev ? (
+            <RelatedPost type="Previous" slug={pathContext.prev.fields.slug} title={pathContext.prev.fields.title} date={pathContext.prev.fields.date} />
+          ) : null}
+          {pathContext.next ? (
+            <RelatedPost type="Next" slug={pathContext.next.fields.slug} title={pathContext.next.fields.title} date={pathContext.next.fields.date} />
+          ) : null}
+        </ul>
       </div>
     </div>
   );
