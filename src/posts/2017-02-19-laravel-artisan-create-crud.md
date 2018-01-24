@@ -12,7 +12,7 @@ art crud:make {resource-name}
 
 And the model, migration, controller, routes and views are created for me. I'll take you through the steps I followed to get to this point.
 
-1 - Create the `artisan` command.
+#### 1. Create the `artisan` command
 
 This was easy. As [the manual](https://laravel.com/docs/5.4/artisan#writing-commands) says, just run
 
@@ -40,7 +40,7 @@ public function handle()
 }
 ```
 
-2 - Make the model.
+#### 2. Make the model
 
 This bit's also straightforward. We want it so that when we run `crud:make` a model, controller etc are created. The model and migration are the easiest because an `artisan` command already exists for that. So again, following [the manual](https://laravel.com/docs/5.4/artisan#programmatically-executing-commands), we arrive at:
 
@@ -53,7 +53,7 @@ protected function makeModel()
 
 This calls the `artisan make:model` command and the `-m` flag means that it should create the migration. That's two birds with one stone.
 
-3 - Make the controller.
+#### 3. Make the controller
 
 This is a bit more tricky. We could just use the `artisan make:controller` command, but we want some boilerplate already in there (the various CRUD commands). The answer is to create a `controller.stub` - basically a template of how we want the controller to look - and to inject our new resource's name at the appropriate points. This can be done easily with `str_replace`. So `makeController` looks a bit like this:
 
@@ -88,14 +88,14 @@ class {{name}}Controller extends Controller
 
     public function index()
     {
-        $rows = {{ "{{name" }}}}::all();
+        $rows = {{name}}::all();
 
-        return view('admin.{{ "{{routeName" }}}}.index', ['rows' => $rows]);
+        return view('admin.{{routeName}}.index', ['rows' => $rows]);
     }
 }
 ```
 
-I use the convention of two curly brackets to specify the placeholders where the name will be injected: `{{ "{{name" }}}}` and `{{ "{{routeName" }}}}`. So if our resource is called `Post`, the above would resolve to:
+I use the convention of two curly brackets to specify the placeholders where the name will be injected: `{{name}}` and `{{routeName}}`. So if our resource is called `Post`, the above would resolve to:
 
 ```php
 namespace App\Http\Controllers;
@@ -125,13 +125,13 @@ This replacement occurs in my `compileStub` method:
 protected function compileStub($stub)
 {
     return str_replace(
-        '{{ "{{name" }}}}',
+        '{{name}}',
         $this->name,
         str_replace(
-            '{{ "{{routeName" }}}}',
+            '{{routeName}}',
             $this->pluralisedName,
             str_replace(
-                '{{ "{{argName" }}}}',
+                '{{argName}}',
                 strtolower($this->name),
                 file_get_contents(base_path('app/stubs/crud/' . $stub))
             )
@@ -140,20 +140,20 @@ protected function compileStub($stub)
 }
 ```
 
-This rather ungainly code replaces all instances of `{{ "{{name" }}}}` with the resource name; all instances of `{{ "{{routeName" }}}}` with a pluralised, lower-case version of the name (I'll leave it up to you to figure out the pluralisation); and all instances of `{{ "{{argName" }}}}` with a lower-case version of the resource name (which I assume to be singular). This is just the nomenclature I use in my CMS - it could be anything.
+This rather ungainly code replaces all instances of `{{name}}` with the resource name; all instances of `{{routeName}}` with a pluralised, lower-case version of the name (I'll leave it up to you to figure out the pluralisation); and all instances of `{{argName}}` with a lower-case version of the resource name (which I assume to be singular). This is just the nomenclature I use in my CMS - it could be anything.
 
-4 - Make the routes.
+#### 4. Make the routes
 
 This follows a similar principle to the previous step: I have a stub file (`routes.stub`) which contains the generic routes for a resource:
 
 ```php
-Route::get('/{{ "{{routeName" }}}}', '{{ "{{name" }}}}Controller@index');
-Route::get('/{{ "{{routeName" }}}}/create', '{{ "{{name" }}}}Controller@create');
-Route::post('/{{ "{{routeName" }}}}', '{{ "{{name" }}}}Controller@store');
-Route::get('/{{ "{{routeName" }}}}/{{ "{{{argName" }}}}}/edit', '{{ "{{name" }}}}Controller@edit');
-Route::patch('/{{ "{{routeName" }}}}/{{ "{{{argName" }}}}}', '{{ "{{name" }}}}Controller@update');
-Route::get('/{{ "{{routeName" }}}}/{{ "{{{argName" }}}}}/delete', '{{ "{{name" }}}}Controller@confirmDelete');
-Route::delete('/{{ "{{routeName" }}}}/{{ "{{{argName" }}}}}', '{{ "{{name" }}}}Controller@destroy');
+Route::get('/{{routeName}}', '{{name}}Controller@index');
+Route::get('/{{routeName}}/create', '{{name}}Controller@create');
+Route::post('/{{routeName}}', '{{name}}Controller@store');
+Route::get('/{{routeName}}/{{{argName}}}/edit', '{{name}}Controller@edit');
+Route::patch('/{{routeName}}/{{{argName}}}', '{{name}}Controller@update');
+Route::get('/{{routeName}}/{{{argName}}}/delete', '{{name}}Controller@confirmDelete');
+Route::delete('/{{routeName}}/{{{argName}}}', '{{name}}Controller@destroy');
 ```
 
 I then replace the placeholders with the resource's name but this time instead of creating a new file I append this to the end of my existing admin routes file:
@@ -169,7 +169,7 @@ protected function makeRoutes()
 }
 ```
 
-5 - Make the views.
+#### 5. Make the views
 
 This is getting a bit predictable. Again, to create the CMS views I have a stub for each view which I then inject with the appropriate names, before creating the views folder for this resource and creating the view files from the stubs.
 
