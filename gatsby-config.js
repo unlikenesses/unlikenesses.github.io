@@ -4,7 +4,7 @@ module.exports = {
     description: '',
     pagination: 5
   },
-  pathPrefix: "/unlikenesses.github.io",
+  pathPrefix: "/",
   plugins: [
     {
       resolve: `gatsby-plugin-google-fonts`,

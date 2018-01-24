@@ -5,7 +5,7 @@ comments: true
 title: Migrating the blog from Jekyll to Gatsby
 ---
 
-Notes on converting this blog from a [Jekyll](https://jekyllrb.com)-generated site (with the [Hyde](https://github.com/poole/hyde) theme) to the React-based [Gatsby.js](https://www.gatsbyjs.org), retaining the same theme.
+Notes on converting this blog from a [Jekyll](https://jekyllrb.com)-generated site (with the [Hyde](https://github.com/poole/hyde) theme) to the React-based [Gatsby.js](https://www.gatsbyjs.org), retaining the same theme. The source code [can be found here](https://github.com/unlikenesses/unlikenesses.github.io/tree/source).
 
 ## Getting started
 
@@ -31,7 +31,7 @@ export default ({ children }) => (
 );
 ```
 
-This uses the same mark-up as the Hyde theme. My `sidebar` component is, for now, a simplified version of the Hyde sidebar (I don't automatically generate any links there yet). See the repo for the final sidebar. To get the Google fonts loaded I install the [Gatsby Google fonts module](https://www.npmjs.com/package/gatsby-plugin-google-fonts):
+This uses the same mark-up as the Hyde theme. My `sidebar` component is, for now, a simplified version of the Hyde sidebar (I don't automatically generate any links there yet). See the repo for [the final sidebar](https://github.com/unlikenesses/unlikenesses.github.io/blob/source/src/layouts/sidebar.js). To get the Google fonts loaded I install the [Gatsby Google fonts module](https://www.npmjs.com/package/gatsby-plugin-google-fonts):
 
 `npm install gatsby-plugin-google-fonts --save`
 
@@ -594,3 +594,5 @@ Now we have the previous and next results we can display the links accordingly i
   ) : null}
 </div>
 ```
+
+[Full source code.](https://github.com/unlikenesses/unlikenesses.github.io/tree/source)
