@@ -3,6 +3,7 @@ published: true
 layout: post
 comments: true
 title: Migrating the blog from Jekyll to Gatsby
+date: "2018-01-10"
 ---
 
 Notes on converting this blog from a [Jekyll](https://jekyllrb.com)-generated site (with the [Hyde](https://github.com/poole/hyde) theme) to the React-based [Gatsby.js](https://www.gatsbyjs.org), retaining the same theme. The source code [can be found here](https://github.com/unlikenesses/unlikenesses.github.io/tree/source).

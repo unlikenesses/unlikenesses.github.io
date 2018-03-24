@@ -3,6 +3,7 @@ published: true
 layout: post
 comments: true
 title: Why an HTTP component?
+date: "2018-02-20"
 ---
 
 Patrick Louys [recommends](https://github.com/PatrickLouys/no-framework-tutorial/blob/master/04-http.md) using an HTTP interface for dealing with web requests and responses, rather than relying on PHP [superglobals](http://php.net/manual/en/language.variables.superglobals.php). I want to look into why this is, i.e. why packages like [his](https://github.com/PatrickLouys/http) (and [the](https://github.com/symfony/http-foundation) [others](https://github.com/nette/http) [he](https://github.com/auraphp/Aura.Web) [lists](https://github.com/fruux/sabre-http)) exist.
