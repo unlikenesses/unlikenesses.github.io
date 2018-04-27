@@ -6,7 +6,7 @@ title: Lessons from Laracasts, Part 1
 date: "2018-03-24"
 ---
 
-[Let's Build a Forum with Laravel and TDD](https://laracasts.com/series/lets-build-a-forum-with-laravel) is a mega-tutorial (102 lessons) by Jeffrey Way on his [Laracasts](https://laracasts.com) site. It's a massive, time-intensive beast that contains lots of useful info, and not least gives the opportunity to watch someone build a fairly complex website from scratch. But its size means that a lot of little tricks and tips are hidden away inside the videos. While each lesson's title reflects a particular feature Jeffrey Way wants to build, I found that there are also particular technical nuggets of info to be found among the broader strategies. So this is a list of any little snippets that cropped up in the course, just minor points I didn't know or found useful. This post contains 50 tips, covering lessons 1-42. More coming soon!
+[Let's Build a Forum with Laravel and TDD](https://laracasts.com/series/lets-build-a-forum-with-laravel) is a mega-tutorial (102 lessons) by Jeffrey Way on his [Laracasts](https://laracasts.com) site. It's a massive, time-intensive beast that contains lots of useful info, and not least gives the opportunity to watch someone build a fairly complex website from scratch. But its size means that a lot of little tricks and tips are hidden away inside the videos. While each lesson's title reflects a particular feature Jeffrey Way wants to build, I found that there are also particular technical nuggets of info to be found among the broader strategies. So this is a list of any little snippets that cropped up in the course, just minor points I didn't know or found useful. This post contains 50 tips, covering lessons 1-42. [See Part 2 here!](http://unlikenesses.com/2018-04-27-laracasts-lessons-part-2/)
 
 #### <a name="1"></a> 1.
 When making a model in artisan, and `-mr` to make the migration (`m`), and a resourceful controller (`r`). Or use `c` for a plain controller. [[Source](https://laracasts.com/series/lets-build-a-forum-with-laravel/episodes/1)]
@@ -203,7 +203,7 @@ $this->favorites()->where($attributes)->get()->each(function($favorite) {
 });
 ```
 
-instead of 
+instead of
 
 ```php
 $this->favorites()->where($attributes)->delete();
@@ -245,3 +245,5 @@ In Vue, the [`.prevent`](https://vuejs.org/v2/guide/events.html#Event-Modifiers)
 
 #### <a name="50"></a> 50.
 To append an attribute to a single instance of an Eloquent model (rather than to every instance as in [41](#41) above), use the [`append` method](https://laravel.com/docs/5.6/eloquent-serialization#appending-values-to-json). [[Source](https://laracasts.com/series/lets-build-a-forum-with-laravel/episodes/42)]
+
+ [Click here for Part 2, covering the second half of the series.](http://unlikenesses.com/2018-04-27-laracasts-lessons-part-2/)
