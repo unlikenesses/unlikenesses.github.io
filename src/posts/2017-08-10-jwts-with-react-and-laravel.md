@@ -116,8 +116,7 @@ public function signIn(Request $request)
 
 If you now POST to the `signin` route with the email and password you created before, you should get back a token similar to this:
 
-```javascripton
-{"token":"eyJ0eXAiOiJKiV1QiLCJhbGcOiJUzI1NiJ9I.yJzdWaiOjIsImlzcyI6ImIeh0dHA6Ly9sb2hbGhvc3QvbGVhNcm4vnd0L3B1YmxpYyhcGkvMc2lnbmluIiw9iaWF0IjoxTAyMzY4NNjM0LCJleH5AiOjE1MDIzNzIyzQsImjjiZiI6MTUwMIM2ODYzNCwianRpjoiSXZzRGZCFZTNpVXVUYzVsVJ9.IYZWDWtsyIo_N-dIERPwg2Cc72XxIMVaoXbL2Yv9RUL"}
+```javascript{"token":"eyJ0eXAiOiJKiV1QiLCJhbGcOiJUzI1NiJ9I.yJzdWaiOjIsImlzcyI6ImIeh0dHA6Ly9sb2hbGhvc3QvbGVhNcm4vnd0L3B1YmxpYyhcGkvMc2lnbmluIiw9iaWF0IjoxTAyMzY4NNjM0LCJleH5AiOjE1MDIzNzIyzQsImjjiZiI6MTUwMIM2ODYzNCwianRpjoiSXZzRGZCFZTNpVXVUYzVsVJ9.IYZWDWtsyIo_N-dIERPwg2Cc72XxIMVaoXbL2Yv9RUL"}
 ```
 
 #### Calling the API
@@ -153,7 +152,7 @@ We'll need to register this middleware to the `$routeMiddleware` array in `app/H
 
 Now if you make a GET call in Postman to `[project_path]/api/clients` you should get this error:
 
-```javascripton
+```javascript
 {"error":"token_not_provided"}
 ```
 

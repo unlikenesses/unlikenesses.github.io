@@ -1,5 +1,7 @@
 import React from "react";
-import Link from "gatsby-link";
+import Layout from "../components/layout";
+import { Link } from "gatsby";
+import { graphql } from "gatsby";
 
 const RelatedPost = ({ type, slug, title, date }) => (
   <li>
@@ -12,10 +14,10 @@ const RelatedPost = ({ type, slug, title, date }) => (
   </li>
 );
 
-export default ({ data, pathContext }) => {
+export default ({ data, pageContext }) => {
   const post = data.post;
   return (
-    <div>
+    <Layout>
       <div className="post">
         <h1 className="post-title">{post.fields.title}</h1>
         <span className="post-date">{post.fields.date}</span>
@@ -23,20 +25,20 @@ export default ({ data, pathContext }) => {
       </div>
       <div className="related">
         <ul className="related-posts">
-          {pathContext.prev ? (
-            <RelatedPost type="Previous" slug={pathContext.prev.fields.slug} title={pathContext.prev.fields.title} date={pathContext.prev.fields.date} />
+          {pageContext.prev ? (
+            <RelatedPost type="Previous" slug={pageContext.prev.fields.slug} title={pageContext.prev.fields.title} date={pageContext.prev.fields.date} />
           ) : null}
-          {pathContext.next ? (
-            <RelatedPost type="Next" slug={pathContext.next.fields.slug} title={pathContext.next.fields.title} date={pathContext.next.fields.date} />
+          {pageContext.next ? (
+            <RelatedPost type="Next" slug={pageContext.next.fields.slug} title={pageContext.next.fields.title} date={pageContext.next.fields.date} />
           ) : null}
         </ul>
       </div>
-    </div>
+    </Layout>
   );
 };
 
 export const query = graphql`
-  query BlogPostQuery($slug: String!) {
+  query($slug: String!) {
     post: markdownRemark(fields: { slug: { eq: $slug } }) {
       html
       fields {

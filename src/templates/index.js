@@ -1,5 +1,6 @@
 import React from "react";
-import Link from "gatsby-link";
+import Layout from "../components/layout";
+import { Link } from "gatsby";
 
 const NavLink = props => {
   if (!props.test) {
@@ -13,13 +14,13 @@ const NavLink = props => {
   }
 };
 
-export default ({ data, pathContext }) => {
-  const { group, index, first, last } = pathContext;
-  const previousUrl = index - 1 == 1 ? "" : (index - 1).toString();
+export default ({ data, pageContext }) => {
+  const { group, index, first, last } = pageContext;
+  const previousUrl = index - 1 === 1 ? "" : (index - 1).toString();
   const nextUrl = (index + 1).toString();
 
   return (
-    <div>
+    <Layout>
       {group.map(({ node }, idx) => (
         <div className="post" key={idx}>
           <Link to={node.fields.slug} className="post-title">
@@ -34,6 +35,6 @@ export default ({ data, pathContext }) => {
         <NavLink test={last} url={nextUrl} text="Older" />
         <NavLink test={first} url={previousUrl} text="Newer" />
       </div>
-    </div>
+    </Layout>
   );
 };
