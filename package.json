@@ -10,18 +10,18 @@
     "help": "gh-pages --help"
   },
   "dependencies": {
-    "gatsby": "^2.15.36",
+    "gatsby": "^2.18.17",
     "gatsby-paginate": "^1.1.1",
-    "gatsby-plugin-google-analytics": "^2.1.21",
+    "gatsby-plugin-google-analytics": "^2.1.31",
     "gatsby-plugin-google-fonts": "^1.0.1",
-    "gatsby-remark-prismjs": "^3.3.18",
-    "gatsby-source-filesystem": "^2.1.31",
-    "gatsby-transformer-remark": "^2.6.28",
+    "gatsby-remark-prismjs": "^3.3.28",
+    "gatsby-source-filesystem": "^2.1.43",
+    "gatsby-transformer-remark": "^2.6.45",
     "prismjs": "^1.17.1",
-    "react": "^16.10.2",
-    "react-dom": "^16.10.2"
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   },
   "devDependencies": {
-    "gh-pages": "^1.2.0"
+    "gh-pages": "^2.1.1"
   }
 }
