@@ -73,4 +73,4 @@ While collections and lazy collections share some of the same implementations fo
 
 ## The missing example: co-routines
 
-PHP generators have also played a role in bringing co-routines to the language. This would require another blog post in itself, and to be frank I'm not ready to tackle it yet. The *locus classicus* on this subject is [an eight year old post](https://nikic.github.io/2012/12/22/Cooperative-multitasking-using-coroutines-in-PHP.html) by PHP superman, Nikita Popov. More recently it has been an important feature in asynchronous PHP projects like [ReactPHP](https://reactphp.org) and [Amp](https://amphp.org).
+PHP generators have also played a role in bringing co-routines to the language. This would require another blog post in itself, and to be frank I'm not ready to tackle it yet. The *locus classicus* on this subject is [an eight year old post](https://nikic.github.io/2012/12/22/Cooperative-multitasking-using-coroutines-in-PHP.html) by PHP superman, Nikita Popov. More recently it has been an important feature in asynchronous PHP projects like [Swoole](https://www.swoole.co.uk), [ReactPHP](https://reactphp.org) and [Amp](https://amphp.org).
