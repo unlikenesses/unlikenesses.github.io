@@ -5,12 +5,12 @@ import { Link } from "gatsby";
 const NavLink = props => {
   if (!props.test) {
     return (
-      <Link to={props.url} className="pagination-item">
+      <Link to={props.url} className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded no-underline">
         {props.text}
       </Link>
     );
   } else {
-    return <span className="pagination-item">{props.text}</span>;
+    return '';
   }
 };
 
@@ -22,16 +22,18 @@ export default ({ data, pageContext }) => {
   return (
     <Layout>
       {group.map(({ node }, idx) => (
-        <div className="post" key={idx}>
-          <Link to={node.fields.slug} className="post-title">
-            {node.fields.title}
-          </Link>
-          <span className="post-date">{node.fields.date}</span>
-          <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
-          <Link to={node.fields.slug}>Read More ></Link>
-        </div>
+        <article className="w-full flex flex-col shadow my-4" key={idx}>
+          <div className="bg-white flex flex-col justify-start p-6">
+            <Link to={node.fields.slug} className="text-3xl font-bold text-gray-800 hover:text-gray-700 no-underline capitalize">
+              {node.fields.title}
+            </Link>
+            <span className="text-sm pb-3">{node.fields.date}</span>
+            <div dangerouslySetInnerHTML={{ __html: node.excerpt }} className="pb-5" />
+            <Link to={node.fields.slug} className="uppercase text-pink-600 hover:text-black no-underline">Read More ></Link>
+          </div>
+        </article>
       ))}
-      <div className="pagination">
+      <div className="w-full justify-between flex pt-6">
         <NavLink test={last} url={nextUrl} text="Older" />
         <NavLink test={first} url={previousUrl} text="Newer" />
       </div>

@@ -8,7 +8,7 @@ date: "2018-02-20"
 
 Patrick Louys [recommends](https://github.com/PatrickLouys/no-framework-tutorial/blob/master/04-http.md) using an HTTP interface for dealing with web requests and responses, rather than relying on PHP [superglobals](http://php.net/manual/en/language.variables.superglobals.php). I want to look into why this is, i.e. why packages like [his](https://github.com/PatrickLouys/http) (and [the](https://github.com/symfony/http-foundation) [others](https://github.com/nette/http) [he](https://github.com/auraphp/Aura.Web) [lists](https://github.com/fruux/sabre-http)) exist.
 
-Let's consider an HTTP request. The PHP global variable for a `GET` request is `$_GET`. So if we have a URL like `http://www.unlikenesses.com/?post=32`, and we run 
+Let's consider an HTTP request. The PHP global variable for a `GET` request is `$_GET`. So if we have a URL like `https://unlikenesses.com/?post=32`, and we run 
 
 ```php
 echo $_GET['post'];
@@ -88,4 +88,4 @@ But, as the docs say, the `send` method "first outputs the HTTP headers followed
 
 The last benefit mentioned is improved testability. Since these HTTP packages are basically representations of HTTP messages in the form of PHP objects, they can be more easily instantiated, manipulated, mocked, and passed between methods and classes. If we want to test a class that requires a `GET` variable we can rewrite the class to accept the `Request` via dependency injection, and in the test mock the `Request` object and pass it to the class. It's a commonly-held principle of testing that the isolation of functionality allowed by dependency injection increases the testability of your code.
 
-The Symfony HttpFoundation component is used on (of course) Symfony, Drupal and Laravel, amongst other frameworks.
+The Symfony HttpFoundation component is used in Symfony (of course), Drupal and Laravel, amongst other frameworks.

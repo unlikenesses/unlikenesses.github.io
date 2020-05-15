@@ -124,6 +124,7 @@ return Redis::get($this->cacheKey()) ?? 0;
 
 [[Source](https://laracasts.com/series/lets-build-a-forum-with-laravel/episodes/68)]
 
+#### <a name="78"></a> 78.
 
 The steps to create a custom [middleware](https://laravel.com/docs/5.6/middleware):
 

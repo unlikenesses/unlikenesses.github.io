@@ -2,6 +2,8 @@
 published: true
 layout: post
 comments: true
+title: Object Literals
+date: "2015-09-06"
 ---
 
 So I'm taking a break from Laravel to continue to brush up my Javascript skills, and I thought a small Chrome extension would be ideal. It's pretty embryonic for now, but basically it involves highlighting certain words on a page and calling an API to find more info related to those words, then displaying a tooltip containing this info when the user hovers over them.

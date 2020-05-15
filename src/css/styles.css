@@ -1,0 +1,49 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+.nunito {
+    font-family: 'Nunito', sans-serif;
+}
+
+p {
+    @apply mb-3;
+}
+
+h2 {
+    @apply text-2xl font-bold pb-3;
+}
+
+h3 {
+    @apply text-xl font-bold py-3;
+}
+
+h4 {
+    @apply text-lg font-bold py-3;
+}
+
+code {
+    @apply text-pink-500 bg-pink-100 rounded-md px-1;
+}
+
+pre code {
+    @apply px-0;
+}
+
+a {
+    @apply text-pink-500 underline;
+}
+
+blockquote {
+    @apply border-pink-500 border-l-4 pl-4 mb-3 text-gray-700;
+}
+
+ul {
+    @apply list-disc list-inside mb-2;
+}
+
+ol {
+    @apply list-decimal list-inside;
+}

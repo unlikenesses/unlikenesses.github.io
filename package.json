@@ -7,19 +7,23 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "deploy": "gatsby build --prefix-paths && gh-pages -d public -b master",
-    "help": "gh-pages --help"
+    "help": "gh-pages --help",
+    "build:css": "postcss src/css/stylesheet.css -o dist/css/stylesheet.css",
+    "watch:css": "watch 'npm run build:css' ./src/css"
   },
   "dependencies": {
     "gatsby": "^2.18.17",
     "gatsby-paginate": "^1.1.1",
     "gatsby-plugin-google-analytics": "^2.1.31",
     "gatsby-plugin-google-fonts": "^1.0.1",
+    "gatsby-plugin-postcss": "^2.3.1",
     "gatsby-remark-prismjs": "^3.3.28",
     "gatsby-source-filesystem": "^2.1.43",
     "gatsby-transformer-remark": "^2.6.45",
     "prismjs": "^1.17.1",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "tailwindcss": "^1.4.6"
   },
   "devDependencies": {
     "gh-pages": "^2.1.1"

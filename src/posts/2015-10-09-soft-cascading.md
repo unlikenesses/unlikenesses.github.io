@@ -4,7 +4,7 @@ layout: post
 comments: true
 ---
 
-So despite my adventures in Laravel (which continue whenever I have some spare time), the difficulties deploying it to crappy shared hosting are making me stick to Codeigniter for any real-life, paid work projects. I've recently been porting (well, completely rewriting) my CMS for Codeigniter 3, and have decided to implement cascading deletes. All very easy with MySQL:
+So despite my adventures in Laravel (which continue whenever I have some spare time), the difficulties deploying it to crappy shared hosting are making me stick to CodeIgniter for any real-life, paid work projects. I've recently been porting (well, completely rewriting) my CMS for CodeIgniter 3, and have decided to implement cascading deletes. All very easy with MySQL:
 
 Imagine I have two tables, `employers` and `employees`. `employees` is a child table of `employers`, and has a field that contains the parent row's `id`. Set this as index. Then set as foreign key related to the employer `id`. Then specify `on delete cascade`.
 
