@@ -37,7 +37,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       createNodeField({
         node,
         name: "url",
-        value: "http://unlikenesses.com" + slug
+        value: "https://unlikenesses.com" + slug
       });
     }
   }

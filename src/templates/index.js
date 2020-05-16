@@ -29,7 +29,7 @@ export default ({ data, pageContext }) => {
             </Link>
             <span className="text-sm pb-3">{node.fields.date}</span>
             <div dangerouslySetInnerHTML={{ __html: node.excerpt }} className="pb-5" />
-            <Link to={node.fields.slug} className="uppercase text-pink-600 hover:text-black no-underline">Read More ></Link>
+            <Link to={node.fields.slug} className="uppercase text-pink-600 hover:underline no-underline">Read More ></Link>
           </div>
         </article>
       ))}
