@@ -27,7 +27,7 @@ module.exports = {
       options: {
         develop: false,
         tailwind: true,
-        ignore: ['prismjs/']
+        ignore: ['prismjs/', 'styles.css']
       }
     },
     {
