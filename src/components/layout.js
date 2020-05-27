@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, StaticQuery, graphql } from "gatsby";
 import "prismjs/themes/prism-tomorrow.css";
+import "../css/tailwind.css";
 import "../css/styles.css";
 import "../css/prism.css";
 
