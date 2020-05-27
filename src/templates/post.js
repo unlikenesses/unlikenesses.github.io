@@ -5,7 +5,7 @@ import { graphql } from "gatsby";
 
 const RelatedPost = ({ type, slug, title, date }) => (
   <Link to={slug} className="w-1/2 bg-white shadow hover:shadow-md text-left p-6 no-underline">
-    <p className="text-lg text-gray-800 font-bold flex items-center">{type}:</p>
+    <p className="text-lg text-gray-700 font-bold flex items-center">{type}:</p>
     <p className="pt-2 capitalize">{title} <small>{date}</small></p>
   </Link>
 );
@@ -15,10 +15,10 @@ export default ({ data, pageContext }) => {
   return (
     <Layout>
       <article className="w-full flex flex-col shadow my-4">
-        <div class="bg-white flex flex-col justify-start p-6">
-          <h1 className="text-3xl font-bold hover:text-gray-700 capitalize">{post.fields.title}</h1>
-          <span className="text-sm pb-3">{post.fields.date}</span>
-          <div dangerouslySetInnerHTML={{ __html: post.html }} />
+        <div className="bg-white flex flex-col justify-start p-6">
+          <h1 className="text-3xl font-bold text-gray-700 capitalize">{post.fields.title}</h1>
+          <span className="text-sm pb-3 text-gray-600">{post.fields.date}</span>
+          <div dangerouslySetInnerHTML={{ __html: post.html }} className="text-gray-700" />
         </div>
       </article>
       <div className="w-full flex pt-6">

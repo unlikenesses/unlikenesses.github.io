@@ -5,7 +5,7 @@ import { Link } from "gatsby";
 const NavLink = props => {
   if (!props.test) {
     return (
-      <Link to={props.url} className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded no-underline">
+      <Link to={props.url} className="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-4 rounded no-underline">
         {props.text}
       </Link>
     );
@@ -24,11 +24,11 @@ export default ({ data, pageContext }) => {
       {group.map(({ node }, idx) => (
         <article className="w-full flex flex-col shadow my-4" key={idx}>
           <div className="bg-white flex flex-col justify-start p-6">
-            <Link to={node.fields.slug} className="text-3xl font-bold text-gray-800 hover:text-gray-700 no-underline capitalize">
+            <Link to={node.fields.slug} className="text-3xl font-bold text-gray-700 hover:text-gray-800 no-underline capitalize">
               {node.fields.title}
             </Link>
-            <span className="text-sm pb-3">{node.fields.date}</span>
-            <div dangerouslySetInnerHTML={{ __html: node.excerpt }} className="pb-5" />
+            <span className="text-sm pb-3 text-gray-600">{node.fields.date}</span>
+            <div dangerouslySetInnerHTML={{ __html: node.excerpt }} className="pb-5 text-gray-700" />
             <Link to={node.fields.slug} className="uppercase text-pink-600 hover:underline no-underline">Read More ></Link>
           </div>
         </article>
