@@ -7,15 +7,15 @@ p {
 }
 
 h2 {
-    @apply text-2xl font-bold pb-3;
+    @apply text-2xl font-bold;
 }
 
 h3 {
-    @apply text-xl font-bold py-3;
+    @apply text-xl font-bold;
 }
 
 h4 {
-    @apply text-lg font-bold py-3;
+    @apply text-lg font-bold;
 }
 
 code {
