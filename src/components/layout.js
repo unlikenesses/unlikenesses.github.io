@@ -31,9 +31,9 @@ export default ({ children }) => (
       }
     `}
     render={data => (
-      <div className="bg-gray-100 nunito">
-        <div className="container mx-auto flex flex-wrap py-6">
-          <header className="pl-5 pb-6">
+      <div className="nunito">
+        <div className="container w-2/3 mx-auto flex flex-wrap py-6">
+          <header className="pl-3 pb-6">
               <Link to="/" className="font-bold text-gray-700 uppercase hover:text-gray-700 text-5xl no-underline">
                 Unlikenesses <span className="text-xl">A PHP Developer</span>
               </Link>
@@ -68,7 +68,7 @@ export default ({ children }) => (
             {children}
           </section>
         </div>
-        <footer className="container mx-auto flex flex-wrap py-4 px-5 justify-between text-gray-600">
+        <footer className="container w-2/3 mx-auto flex flex-wrap py-4 px-5 justify-between text-gray-600">
           <p>Unlikenesses</p>
           <p>Built with <a href="https://www.gatsbyjs.org" target="_blank">GatsbyJS</a> and <a href="https://tailwindcss.com" target="_blank">Tailwind CSS</a></p>
         </footer>

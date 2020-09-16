@@ -14,11 +14,11 @@ export default ({ data, pageContext }) => {
   const post = data.post;
   return (
     <Layout>
-      <article className="w-full flex flex-col shadow my-4">
-        <div className="bg-white flex flex-col justify-start p-6">
-          <h1 className="text-3xl font-bold text-gray-700 capitalize">{post.fields.title}</h1>
-          <span className="text-sm pb-3 text-gray-600">{post.fields.date}</span>
-          <div dangerouslySetInnerHTML={{ __html: post.html }} className="text-gray-700" />
+      <article className="w-full flex flex-col my-4">
+        <div className="bg-white flex flex-col justify-start py-6">
+          <h1 className="text-4xl font-bold text-gray-700 capitalize">{post.fields.title}</h1>
+          <span className="text-sm pb-8 text-gray-600">{post.fields.date}</span>
+          <div dangerouslySetInnerHTML={{ __html: post.html }} className="text-gray-700 text-lg" />
         </div>
       </article>
       <div className="w-full flex pt-6">

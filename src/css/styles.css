@@ -3,15 +3,15 @@
 }
 
 p {
-    @apply mb-3;
+    @apply mb-6 leading-loose;
 }
 
 h2 {
-    @apply text-2xl font-bold;
+    @apply text-2xl font-bold mt-2 mb-6;
 }
 
 h3 {
-    @apply text-xl font-bold;
+    @apply text-xl font-bold mt-4 mb-5;
 }
 
 h4 {
@@ -19,7 +19,7 @@ h4 {
 }
 
 code {
-    @apply text-pink-500 bg-pink-100 rounded-md px-1;
+    @apply text-pink-500 bg-pink-100 rounded-md px-2 py-1;
 }
 
 pre code {
