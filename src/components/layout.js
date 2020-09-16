@@ -39,7 +39,7 @@ export default ({ children }) => (
               </Link>
               <nav>
                 <a
-                  className="no-underline mr-3 text-gray-600 hover:text-gray-700"
+                  className="no-underline mr-3 text-gray-600 hover:text-pink-600"
                   href="https://twitter.com/unlikenesses"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -47,7 +47,7 @@ export default ({ children }) => (
                   Twitter
                 </a>
                 <a
-                  className="no-underline mr-3 text-gray-600 hover:text-gray-700"
+                  className="no-underline mr-3 text-gray-600 hover:text-pink-600"
                   href="https://github.com/unlikenesses"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -55,7 +55,7 @@ export default ({ children }) => (
                   GitHub
                 </a>
                 <a
-                  className="no-underline text-gray-600 hover:text-gray-700"
+                  className="no-underline text-gray-600 hover:text-pink-600"
                   href="http://codepen.io/unlikenesses/"
                   target="_blank"
                   rel="noopener noreferrer"

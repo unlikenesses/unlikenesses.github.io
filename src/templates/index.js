@@ -24,12 +24,11 @@ export default ({ data, pageContext }) => {
       {group.map(({ node }, idx) => (
         <article className="w-full flex flex-col shadow my-4" key={idx}>
           <div className="bg-white flex flex-col justify-start p-6">
-            <Link to={node.fields.slug} className="text-3xl font-bold text-gray-700 hover:text-gray-800 no-underline capitalize">
+            <Link to={node.fields.slug} className="text-2xl font-bold text-pink-600 hover:underline no-underline capitalize">
               {node.fields.title}
             </Link>
             <span className="text-sm pb-3 text-gray-600">{node.fields.date}</span>
             <div dangerouslySetInnerHTML={{ __html: node.excerpt }} className="pb-5 text-gray-700" />
-            <Link to={node.fields.slug} className="uppercase text-pink-600 hover:underline no-underline">Read More ></Link>
           </div>
         </article>
       ))}
