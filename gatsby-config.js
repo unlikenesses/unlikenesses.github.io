@@ -1,11 +1,12 @@
 module.exports = {
   siteMetadata: {
     title: `Unlikenesses`,
-    description: '',
+    description: 'A PHP Developer',
     pagination: 5
   },
   pathPrefix: "/",
   plugins: [
+    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-postcss`
     },

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, StaticQuery, graphql } from "gatsby";
+import { Helmet } from "react-helmet"
 import "prismjs/themes/prism-tomorrow.css";
 import "../css/tailwind.css";
 import "../css/styles.css";
@@ -32,6 +33,10 @@ export default ({ children }) => (
     `}
     render={data => (
       <div className="nunito">
+        <Helmet>
+          <title>{ data.site.siteMetadata.title }</title>
+          <meta name="description" content={ data.site.siteMetadata.description } />
+        </Helmet>
         <div className="container w-2/3 mx-auto flex flex-wrap py-6">
           <header className="pl-3 pb-6">
               <Link to="/" className="font-bold text-gray-700 uppercase hover:text-gray-700 text-5xl no-underline">

@@ -98,7 +98,7 @@ exports.createPages = ({ graphql, actions }) => {
         edges: result.data.posts.edges,
         createPage: createPage,
         pageTemplate: "src/templates/index.js",
-        pageLength: 3
+        pageLength: 4
       });
       result.data.posts.edges.map(({ node, next, previous }) => {
         createPage({
