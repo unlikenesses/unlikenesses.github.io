@@ -6,7 +6,7 @@ import { graphql } from "gatsby";
 const RelatedPost = ({ type, slug, title, date }) => (
   <Link to={slug} className="w-1/2 bg-white shadow hover:shadow-md text-left p-6 no-underline">
     <p className="text-lg text-gray-700 font-bold flex items-center">{type}:</p>
-    <p className="pt-2 capitalize">{title} <small>{date}</small></p>
+    <p className="pt-0 md:pt-2 capitalize">{title} <small>{date}</small></p>
   </Link>
 );
 

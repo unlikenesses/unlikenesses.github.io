@@ -37,10 +37,10 @@ export default ({ children }) => (
           <title>{ data.site.siteMetadata.title }</title>
           <meta name="description" content={ data.site.siteMetadata.description } />
         </Helmet>
-        <div className="container w-2/3 mx-auto flex flex-wrap py-6">
+        <div className="container w-full md:w-2/3 mx-auto flex flex-wrap py-6">
           <header className="pl-3 pb-6">
-              <Link to="/" className="font-bold text-gray-700 uppercase hover:text-gray-700 text-5xl no-underline">
-                Unlikenesses <span className="text-xl">A PHP Developer</span>
+              <Link to="/" className="font-bold text-gray-700 uppercase hover:text-gray-700 text-xl md:text-5xl no-underline">
+                Unlikenesses <span className="text-xs md:text-xl">A PHP Developer</span>
               </Link>
               <nav className="flex space-x-5 mt-1">
                 <a
@@ -74,7 +74,7 @@ export default ({ children }) => (
             {children}
           </section>
         </div>
-        <footer className="container w-2/3 mx-auto flex flex-wrap py-4 px-5 justify-between text-gray-600">
+        <footer className="container text-sm md:text-base w-full md:w-2/3 mx-auto flex flex-wrap py-4 px-5 justify-between text-gray-600">
           <p>Unlikenesses</p>
           <p>Built with <a href="https://www.gatsbyjs.org" target="_blank">GatsbyJS</a> and <a href="https://tailwindcss.com" target="_blank">Tailwind CSS</a></p>
         </footer>
