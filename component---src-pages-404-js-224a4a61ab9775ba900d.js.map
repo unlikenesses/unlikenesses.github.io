@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack:///./src/pages/404.js"],"names":[],"mappings":"2FAAA,gCAEe,4BACb,6BACE,8CACA","file":"component---src-pages-404-js-224a4a61ab9775ba900d.js","sourcesContent":["import React from \"react\";\r\n\r\nexport default () => (\r\n  <div>\r\n    <h1>404! 404! 404!</h1>\r\n    <p>Couldn't find that page, sorry...</p>\r\n  </div>\r\n);\r\n"],"sourceRoot":""}
