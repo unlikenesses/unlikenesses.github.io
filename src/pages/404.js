@@ -1,8 +1,22 @@
-import React from "react";
+import * as React from 'react';
+import { Link } from 'gatsby';
+import Layout from '../components/layout';
+import { SEO } from '../components/seo';
 
-export default () => (
-  <div>
-    <h1>404! 404! 404!</h1>
-    <p>Couldn't find that page, sorry...</p>
-  </div>
+const NotFoundPage = () => {
+  return (
+    <Layout>
+      <p className="text-9xl/loose">
+        404
+        <br />
+        <Link to="/">Go home</Link>.
+      </p>
+    </Layout>
+  );
+};
+
+export default NotFoundPage;
+
+export const Head = () => (
+  <SEO />
 );

@@ -1,15 +1,15 @@
+/**
+ * @type {import('gatsby').GatsbyConfig}
+ */
 module.exports = {
   siteMetadata: {
-    title: `Unlikenesses`,
+    title: 'Unlikenesses',
     description: 'A PHP Developer',
-    pagination: 5
+    twitterUsername: '@unlikenesses',
+    siteUrl: 'https://www.unlikenesses.com',
   },
-  pathPrefix: "/",
   plugins: [
-    `gatsby-plugin-react-helmet`,
-    {
-      resolve: `gatsby-plugin-postcss`
-    },
+    "gatsby-plugin-postcss",
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
@@ -17,10 +17,10 @@ module.exports = {
       }
     },
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: "gatsby-source-filesystem",
       options: {
-        name: `src`,
-        path: `${__dirname}/src/`
+        name: `posts`,
+        path: `${__dirname}/posts`,
       }
     },
     {
@@ -42,7 +42,7 @@ module.exports = {
             }
           }
         ]
-      }
-    }
+      },
+    },
   ]
 };

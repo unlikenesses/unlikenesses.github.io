@@ -1,7 +1,7 @@
-import React from "react";
-import Layout from "../components/layout";
-import { Link } from "gatsby";
-import { graphql } from "gatsby";
+import React from 'react';
+import Layout from '../components/layout';
+import { Link, graphql } from 'gatsby';
+import { SEO } from '../components/seo';
 
 const RelatedPost = ({ type, slug, title, date }) => (
   <Link to={slug} className="w-1/2 bg-white shadow hover:shadow-md text-left p-6 no-underline">
@@ -10,8 +10,9 @@ const RelatedPost = ({ type, slug, title, date }) => (
   </Link>
 );
 
-export default ({ data, pageContext }) => {
-  const post = data.post;
+const Post = ({ data, pageContext }) => {
+  const { post } = data;
+  
   return (
     <Layout>
       <article className="w-full flex flex-col my-4">
@@ -34,14 +35,23 @@ export default ({ data, pageContext }) => {
 };
 
 export const query = graphql`
-  query($slug: String!) {
-    post: markdownRemark(fields: { slug: { eq: $slug } }) {
+  query($id: String!) {
+    post: markdownRemark(id: { eq: $id }) {
       html
       fields {
         title
         date
         url
+        slug
       }
     }
   }
 `;
+
+export default Post;
+
+export const Head = ({data}) => {
+  const { post } = data;
+
+  return <SEO title={post.fields.title} />
+};
